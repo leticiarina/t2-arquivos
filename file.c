@@ -188,3 +188,7 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 		fprintf(output, "%d", 8);
 
 }
+
+removeRegisters(INDEX* indexSizeIndicator, INDEX* indexDelimiterRegister, INDEX* indexFixedFields){
+	
+}

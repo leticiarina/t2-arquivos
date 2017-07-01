@@ -34,29 +34,58 @@ int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index){
 	}
 
 	// Procura o byte em que o registro deve ser inserido no arquivo de índice
-	insertByte = searchIndex(index, insert);
+	insertByte = insertIndex(index, insert);
 
 	return TRUE;
 
 }
 
-// Procura o byte em que um arquivo deve ser inserido.
-int searchIndex(INDEX *index, INDEXREG *insert){
+int searchIndex(INDEX *index, int ticket){
+	int first, last, middle;
+	first = 0;
+	last = index->size - 1;
+	middle = (first + last)/2;
 
+	while(first <= last){
+		if(index->indexReg[middle] < ticket) first = middle + 1;
+		else if(index->indexReg[middle] == ticket) return middle;
+		else last = middle - 1;
+
+		if(first <= last) return middle;
+
+	}
+
+	return middle;
+}
+
+void insertAndShift(INDEX *index, INDEXREG* insert, int local){
+	local++;
+	INDEXREG *aux = (INDEXREG*) malloc(sizeof(INDEXREG));
+	aux = index->indexReg[index->size];
+	int i = local;
+	index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
+
+	while(i < index->size){
+		index->indexReg[i+1] = index->indexReg[i];
+		i++;
+	}
+	index->size++;
+	index->indexReg[local] = aux; 
+}
+
+// Procura o byte em que um arquivo deve ser inserido.
+int insertIndex(INDEX *index, INDEXREG *insert){
+
+	int local;
 	// Nenhum registro foi inserido ainda
 	if(index->size == 0){
 		index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
 		index->indexReg[index->size] = insert;
 		(index->size)++;
+	
 	} else {
-
-		// Verifica em qual registro começa a busca
-		int search = (index->size)/2;
-
-		while(search >= 0 && search < index->size){
-			
-		}
-
+		local = searchIndex(index, insert->ticket);
+		insertAndShift(index, insert, local);	
 	}
 
 }
