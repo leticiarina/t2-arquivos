@@ -43,6 +43,7 @@ int createOutputFiles(char *filename){
 
     char end;
 
+    // Leitura de cada campo de cada registro
     while((end = getc(registersFile)) != EOF){
 
         fseek(registersFile, -1, SEEK_CUR);
@@ -103,43 +104,58 @@ char *readField(FILE *registersFile){
 
 }
 
-// 
+/* Função writeOutputFiles: escreve nos arquivos de saída.
+** Type 1 - registros com indicador de tamanho
+** 		2 - registros com delimitador
+**		3 - registros com número fixo de campos */
 void writeOutputFiles(REG *regist, FILE *output, int type){
 	
 	int size;
-	int regSize = sizeof(int) + (int)strlen(regist->dominio) + 20*sizeof(char) + sizeof(int) + 
-    (int)strlen(regist->nome) + sizeof(int) + (int)strlen(regist->cidade) + sizeof(int) + 
-    (int)strlen(regist->uf) + 20*sizeof(char) + 20*sizeof(char) + sizeof(int);
+
+	/* 4 ints para armazenar o tamanho dos campos variáveis
+	** 1 int para o ticket	
+	** 3 de 20 bytes: documento, dataHoraCadastro, dataHoraAtualiza
+	** 4 de campos variáveis */
+	int regSize = 4*sizeof(int) + sizeof(int) + 3*(20*sizeof(char)) + (int)strlen(regist->dominio) + 
+    (int)strlen(regist->nome)+ (int)strlen(regist->cidade)+ (int)strlen(regist->uf);
     
-    // Registro com indicador de tamanho
     if(type == 1)
 		fwrite(&regSize, 1, sizeof(int), output);
 
     // Escrita dos campos de tamanho fixo
+	if(type == 3) fprintf(output, "%d", 0);
 	fwrite(&(regist->ticket), 1, sizeof(int), output);
+	if(type == 3) fprintf(output, "%d", 1);
 	fwrite(regist->documento, 20, sizeof(char), output);
+	if(type == 3) fprintf(output, "%d", 2);
 	fwrite(regist->dataHoraCadastro, 20, sizeof(char), output);
+	if(type == 3) fprintf(output, "%d", 3);
 	fwrite(regist->dataHoraAtualiza, 20, sizeof(char), output);
 
     // Escrita dos campos de tamanho variável: leitura do tamanho, escrita do tamanho e escrita do campo.
+	if(type == 3) fprintf(output, "%d", 4);
     size = (int) strlen(regist->dominio);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->dominio, (int)strlen(regist->dominio), sizeof(char), output);
 
+	if(type == 3) fprintf(output, "%d", 5);
     size = (int)strlen(regist->nome);
     fwrite(&size, 1, sizeof(int), output);
-    fwrite(regist->nome, (int)strlen(regist->nome), sizeof(char), output);
+	fwrite(regist->nome, (int)strlen(regist->nome), sizeof(char), output);
 
-    size = (int)strlen(regist->cidade);
+    if(type == 3) fprintf(output, "%d", 6);
+	size = (int)strlen(regist->cidade);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->cidade, (int)strlen(regist->cidade), sizeof(char), output);
 
+	if(type == 3) fprintf(output, "%d", 7);
     size = (int)strlen(regist->uf);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->uf, (int)strlen(regist->uf), sizeof(char), output);
     
-    // Uso de delimitadores entre registros
     if(type == 2)
-		fprintf(output, "%s", "#");
+		fprintf(output, "%c", "#");
+	else if(type == 3)
+		fprintf(output, "%d", 8);
 
 }
