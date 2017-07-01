@@ -10,20 +10,20 @@
 #include "index.h"
 
 // Função readRegisters: realiza a leitura de um arquivo de registros.
-void readRegisters(){
+void readRegisters(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields){
 
 	char *filename = (char*) malloc(sizeof(char)*256);
 	printf("Insira o nome do arquivo que deseja ler: ");
 	scanf("%s", filename);
 
-	createOutputFiles(filename);
+	createOutputFiles(filename, indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 
 	free(filename);
 
 }
 
 // Função createOutputFiles: cria os arquivos de saída dos três tipos desejados e os arquivos de índice.
-int createOutputFiles(char *filename){
+int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields){
 
 	FILE *registersFile = fopen(filename, "r");
     REG *regist = (REG*)malloc(sizeof(REG));
@@ -33,9 +33,9 @@ int createOutputFiles(char *filename){
 	FILE *fixedFields = fopen("numero-fixo-campos.bin","wb");
 
 	// Arquivos de índice
-	FILE *indexSizeIndicator = fopen("indice-indicador-tamanho.bin","wb");
-	FILE *indexDelimiterRegister = fopen("indice-delimitador-registros.bin","wb");
-	FILE *indexFixedFields = fopen("indice-numero-fixo-campos.bin","wb");
+	FILE *fileSizeIndicator = fopen("indice-indicador-tamanho.bin","wb");
+	FILE *fileDelimiterRegister = fopen("indice-delimitador-registros.bin","wb");
+	FILE *fileFixedFields = fopen("indice-numero-fixo-campos.bin","wb");
 
 	if(registersFile == NULL){
 		printf("Erro ao abrir o arquivo solicitado.\n");
@@ -47,7 +47,7 @@ int createOutputFiles(char *filename){
         return FALSE;
     }
 
-    if(indexSizeIndicator == NULL || indexDelimiterRegister == NULL || indexFixedFields == NULL){
+    if(fileSizeIndicator == NULL || fileDelimiterRegister == NULL || fileFixedFields == NULL){
         printf("Erro ao criar arquivos de índice.\n");
         return FALSE;
     }
@@ -80,9 +80,9 @@ int createOutputFiles(char *filename){
 		writeOutputFiles(regist, fixedFields, 3);
 
 		// Escrita no arquivo de índice
-		writeIndexFiles(regist->ticket, sizeIndicatorByte, indexSizeIndicator);
-		writeIndexFiles(regist->ticket, delimiterRegisterByte, indexDelimiterRegister);
-		writeIndexFiles(regist->ticket, fixedFieldsByte, indexFixedFields);
+		writeIndexFiles(regist->ticket, sizeIndicatorByte, fileSizeIndicator, indexSizeIndicator);
+		writeIndexFiles(regist->ticket, delimiterRegisterByte, fileDelimiterRegister, indexDelimiterRegister);
+		writeIndexFiles(regist->ticket, fixedFieldsByte, fileFixedFields, indexFixedFields);
 
 		// Libera memória utilizada para guardar cada campo
 	    free(regist->dominio);
@@ -98,9 +98,9 @@ int createOutputFiles(char *filename){
     fclose(delimiterRegister);
     fclose(fixedFields);
 
-    fclose(indexSizeIndicator);
-    fclose(indexDelimiterRegister);
-    fclose(indexFixedFields);
+    fclose(fileSizeIndicator);
+    fclose(fileDelimiterRegister);
+    fclose(fileFixedFields);
 
     free(regist);
 

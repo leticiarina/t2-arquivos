@@ -9,6 +9,8 @@
 #define FALSE 0
 #define TRUE 1
 
+#include "index.h"
+
 typedef struct reg{
     char *dominio; //variable size
     char documento[20]; //fixed size
@@ -20,8 +22,8 @@ typedef struct reg{
     int ticket; //fixed size
 }REG;
 
-void readRegisters();
-int createOutputFiles(char *filename);
+void readRegisters(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields);
+int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields);
 char *readField(FILE *registersFile);
 void writeOutputFiles(REG *regist, FILE *output, int type);
 

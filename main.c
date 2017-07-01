@@ -6,17 +6,21 @@
 #include <stdio.h>
 #include "auxFunctions.h"
 #include "file.h"
+#include "index.h"
 
 int main (int argc, char *argv[]){
 
 	int option;
+	INDEX *indexSizeIndicator = initIndex();
+	INDEX *indexDelimiterRegister = initIndex();
+	INDEX *indexFixedFields = initIndex();
 
 	do {
 		printOptions();
 		scanf("%d", &option);
 
 		switch(option){
-			case 1: readRegisters();
+			case 1: readRegisters(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 				break;
 			case 2: printf("opção 2\n");
 				break;
@@ -33,6 +37,9 @@ int main (int argc, char *argv[]){
 
 	} while(option != 0);
 
+	deleteIndex(indexSizeIndicator);
+	deleteIndex(indexDelimiterRegister);
+	deleteIndex(indexFixedFields);
 	printf("Programa encerrado.\n");
 
 }

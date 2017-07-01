@@ -6,6 +6,20 @@
 #ifndef _INDEX_H_
 #define _INDEX_H_
 
-int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile);
+// Struct para armazenar um registro
+typedef struct indexReg {
+	int ticket;
+	int byteOffset;
+} INDEXREG;
+
+typedef struct index {
+	int size; // tamanho do vetor de registros
+	INDEXREG **indexReg; // vetor contendo vários registros
+} INDEX;
+
+INDEX *initIndex();
+int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index);
+int searchIndex(INDEX *index, INDEXREG *insert);
+void deleteIndex(INDEX *index);
 
 #endif
