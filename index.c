@@ -43,7 +43,6 @@ int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index){
 // Procura o byte em que um arquivo deve ser inserido.
 int searchIndex(INDEX *index, INDEXREG *insert){
 
-
 	// Nenhum registro foi inserido ainda
 	if(index->size == 0){
 		index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
@@ -53,6 +52,10 @@ int searchIndex(INDEX *index, INDEXREG *insert){
 
 		// Verifica em qual registro começa a busca
 		int search = (index->size)/2;
+
+		while(search >= 0 && search < index->size){
+			
+		}
 
 	}
 
