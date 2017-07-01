@@ -60,17 +60,15 @@ int searchIndex(INDEX *index, int ticket){
 
 void insertAndShift(INDEX *index, INDEXREG* insert, int local){
 	local++;
-	INDEXREG *aux = (INDEXREG*) malloc(sizeof(INDEXREG));
-	aux = index->indexReg[index->size];
-	int i = local;
+	int i = index->size;
 	index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
 
-	while(i < index->size){
+	while(i > local){
 		index->indexReg[i+1] = index->indexReg[i];
-		i++;
+		i--;
 	}
 	index->size++;
-	index->indexReg[local] = aux; 
+	index->indexReg[local] = insert; 
 }
 
 // Procura o byte em que um arquivo deve ser inserido.
