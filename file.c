@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "file.h"
+#include "index.h"
 
 // Função readRegisters: realiza a leitura de um arquivo de registros.
 void readRegisters(){
@@ -21,7 +22,7 @@ void readRegisters(){
 
 }
 
-// Função createOutputFiles: cria os arquivos de saída dos três tipos desejados.
+// Função createOutputFiles: cria os arquivos de saída dos três tipos desejados e os arquivos de índice.
 int createOutputFiles(char *filename){
 
 	FILE *registersFile = fopen(filename, "r");
@@ -30,7 +31,12 @@ int createOutputFiles(char *filename){
 	FILE *sizeIndicator = fopen("indicador-tamanho.bin","wb");
 	FILE *delimiterRegister = fopen("delimitador-registros.bin","wb");
 	FILE *fixedFields = fopen("numero-fixo-campos.bin","wb");
-    
+
+	// Arquivos de índice
+	FILE *indexSizeIndicator = fopen("indice-indicador-tamanho.bin","wb");
+	FILE *indexDelimiterRegister = fopen("indice-delimitador-registros.bin","wb");
+	FILE *indexFixedFields = fopen("indice-numero-fixo-campos.bin","wb");
+
 	if(registersFile == NULL){
 		printf("Erro ao abrir o arquivo solicitado.\n");
 		return FALSE;
@@ -41,13 +47,24 @@ int createOutputFiles(char *filename){
         return FALSE;
     }
 
+    if(indexSizeIndicator == NULL || indexDelimiterRegister == NULL || indexFixedFields == NULL){
+        printf("Erro ao criar arquivos de índice.\n");
+        return FALSE;
+    }
+
+    int sizeIndicatorByte, delimiterRegisterByte, fixedFieldsByte;
     char end;
 
-    // Leitura de cada campo de cada registro
     while((end = getc(registersFile)) != EOF){
 
         fseek(registersFile, -1, SEEK_CUR);
 
+        // Armazena o byte em que o próximo registro será armazenado
+        sizeIndicatorByte = ftell(sizeIndicator);
+        delimiterRegisterByte = ftell(delimiterRegister);
+        fixedFieldsByte = ftell(fixedFields);
+
+	    // Leitura de cada campo de cada registro
 		regist->dominio = readField(registersFile);
 		strcpy(regist->documento, readField(registersFile));
 		regist->nome = readField(registersFile);
@@ -57,9 +74,15 @@ int createOutputFiles(char *filename){
 		strcpy(regist->dataHoraAtualiza, readField(registersFile));
         fscanf(registersFile, "%d\n", &(regist->ticket));
  
+ 		// Escrita do registro no arquivo de saída
 		writeOutputFiles(regist, sizeIndicator, 1);
 		writeOutputFiles(regist, delimiterRegister, 2);
 		writeOutputFiles(regist, fixedFields, 3);
+
+		// Escrita no arquivo de índice
+		writeIndexFiles(regist->ticket, sizeIndicatorByte, indexSizeIndicator);
+		writeIndexFiles(regist->ticket, delimiterRegisterByte, indexDelimiterRegister);
+		writeIndexFiles(regist->ticket, fixedFieldsByte, indexFixedFields);
 
 		// Libera memória utilizada para guardar cada campo
 	    free(regist->dominio);
@@ -70,9 +93,15 @@ int createOutputFiles(char *filename){
     }
 
     fclose(registersFile);
+
     fclose(sizeIndicator);
     fclose(delimiterRegister);
     fclose(fixedFields);
+
+    fclose(indexSizeIndicator);
+    fclose(indexDelimiterRegister);
+    fclose(indexFixedFields);
+
     free(regist);
 
     printf("\nArquivo lido com sucesso. Criação de arquivos de saída efetuado.\n");
