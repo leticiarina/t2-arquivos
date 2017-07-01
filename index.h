@@ -19,7 +19,10 @@ typedef struct index {
 
 INDEX *initIndex();
 int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index);
-int searchIndex(INDEX *index, INDEXREG *insert);
+int searchIndex(INDEX *index, int ticket);
+void insertAndShift(INDEX *index, INDEXREG* insert, int local);
+int insertIndex(INDEX *index, INDEXREG *insert);
+
 void deleteIndex(INDEX *index);
 
 #endif
