@@ -47,8 +47,8 @@ int searchIndex(INDEX *index, int ticket){
 	middle = (first + last)/2;
 
 	while(first <= last){
-		if(index->indexReg[middle] < ticket) first = middle + 1;
-		else if(index->indexReg[middle] == ticket) return middle;
+		if(index->indexReg[middle]->ticket < ticket) first = middle + 1;
+		else if(index->indexReg[middle]->ticket == ticket) return middle;
 		else last = middle - 1;
 
 		if(first <= last) return middle;

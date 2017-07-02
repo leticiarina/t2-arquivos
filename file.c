@@ -189,6 +189,6 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 
 }
 
-removeRegisters(INDEX* indexSizeIndicator, INDEX* indexDelimiterRegister, INDEX* indexFixedFields){
+int removeRegisters(INDEX* indexSizeIndicator, INDEX* indexDelimiterRegister, INDEX* indexFixedFields){
 	
 }
