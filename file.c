@@ -19,7 +19,6 @@ void readRegisters(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, IND
 	createOutputFiles(filename, indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 
 	free(filename);
-
 }
 
 // Função createOutputFiles: cria os arquivos de saída dos três tipos desejados e os arquivos de índice.
@@ -92,6 +91,13 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 
     }
 
+    //Ordena os arquivos de índice
+	orderIndex(indexSizeIndicator);
+	orderIndex(indexDelimiterRegister);
+	orderIndex(indexFixedFields);
+
+	printIndexFile(indexSizeIndicator);
+
     fclose(registersFile);
 
     fclose(sizeIndicator);
@@ -152,32 +158,32 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 		fwrite(&regSize, 1, sizeof(int), output);
 
     // Escrita dos campos de tamanho fixo
-	if(type == 3) fprintf(output, "%d", 0);
+	if(type == 3) fprintf(output, "%c", '0');
 	fwrite(&(regist->ticket), 1, sizeof(int), output);
-	if(type == 3) fprintf(output, "%d", 1);
+	if(type == 3) fprintf(output, "%c", '1');
 	fwrite(regist->documento, 20, sizeof(char), output);
-	if(type == 3) fprintf(output, "%d", 2);
+	if(type == 3) fprintf(output, "%c", '2');
 	fwrite(regist->dataHoraCadastro, 20, sizeof(char), output);
-	if(type == 3) fprintf(output, "%d", 3);
+	if(type == 3) fprintf(output, "%c", '3');
 	fwrite(regist->dataHoraAtualiza, 20, sizeof(char), output);
 
     // Escrita dos campos de tamanho variável: leitura do tamanho, escrita do tamanho e escrita do campo.
-	if(type == 3) fprintf(output, "%d", 4);
+	if(type == 3) fprintf(output, "%c", '4');
     size = (int) strlen(regist->dominio);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->dominio, (int)strlen(regist->dominio), sizeof(char), output);
 
-	if(type == 3) fprintf(output, "%d", 5);
+	if(type == 3) fprintf(output, "%c", '5');
     size = (int)strlen(regist->nome);
     fwrite(&size, 1, sizeof(int), output);
 	fwrite(regist->nome, (int)strlen(regist->nome), sizeof(char), output);
 
-    if(type == 3) fprintf(output, "%d", 6);
+    if(type == 3) fprintf(output, "%c", '6');
 	size = (int)strlen(regist->cidade);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->cidade, (int)strlen(regist->cidade), sizeof(char), output);
 
-	if(type == 3) fprintf(output, "%d", 7);
+	if(type == 3) fprintf(output, "%c", '7');
     size = (int)strlen(regist->uf);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->uf, (int)strlen(regist->uf), sizeof(char), output);
@@ -185,6 +191,6 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
     if(type == 2)
 		fprintf(output, "%c", '#');
 	else if(type == 3)
-		fprintf(output, "%d", 8);
+		fprintf(output, "%c", '8');
 
 }
