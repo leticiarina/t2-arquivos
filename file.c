@@ -152,32 +152,32 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 		fwrite(&regSize, 1, sizeof(int), output);
 
     // Escrita dos campos de tamanho fixo
-	if(type == 3) fprintf(output, "%d", 0);
+	if(type == 3) fprintf(output, "%c", "0");
 	fwrite(&(regist->ticket), 1, sizeof(int), output);
-	if(type == 3) fprintf(output, "%d", 1);
+	if(type == 3) fprintf(output, "%c", "1");
 	fwrite(regist->documento, 20, sizeof(char), output);
-	if(type == 3) fprintf(output, "%d", 2);
+	if(type == 3) fprintf(output, "%c", "2");
 	fwrite(regist->dataHoraCadastro, 20, sizeof(char), output);
-	if(type == 3) fprintf(output, "%d", 3);
+	if(type == 3) fprintf(output, "%c", "3");
 	fwrite(regist->dataHoraAtualiza, 20, sizeof(char), output);
 
     // Escrita dos campos de tamanho variável: leitura do tamanho, escrita do tamanho e escrita do campo.
-	if(type == 3) fprintf(output, "%d", 4);
+	if(type == 3) fprintf(output, "%c", "4");
     size = (int) strlen(regist->dominio);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->dominio, (int)strlen(regist->dominio), sizeof(char), output);
 
-	if(type == 3) fprintf(output, "%d", 5);
+	if(type == 3) fprintf(output, "%c", "5");
     size = (int)strlen(regist->nome);
     fwrite(&size, 1, sizeof(int), output);
 	fwrite(regist->nome, (int)strlen(regist->nome), sizeof(char), output);
 
-    if(type == 3) fprintf(output, "%d", 6);
+    if(type == 3) fprintf(output, "%c", "6");
 	size = (int)strlen(regist->cidade);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->cidade, (int)strlen(regist->cidade), sizeof(char), output);
 
-	if(type == 3) fprintf(output, "%d", 7);
+	if(type == 3) fprintf(output, "%c", "7");
     size = (int)strlen(regist->uf);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->uf, (int)strlen(regist->uf), sizeof(char), output);
@@ -185,31 +185,6 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
     if(type == 2)
 		fprintf(output, "%c", "#");
 	else if(type == 3)
-		fprintf(output, "%d", 8);
+		fprintf(output, "%c", "8");
 
-}
-
-int removeRegister(INDEX* index, int ticket, FILE *output, int *topo){
-	int local;
-	int aux;
-	char asterisco = '*';
-
-	local = searchIndex(index,ticket); //faz a busca binaria no indice primario
-	if(ticket == index->indexreg[local]->ticket){
-		//verifica tamanho do registro
-		
-			
-		fseek(output,indexreg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro
-		fwrite(&asterisco,1,sizeof(char),output); //insere o *
-		fwrite(&tamanho,1,sizeof(int),output); //insere o tamanho do registro
-		fwrite(topo,1,sizeof(int),output); //insere o antigo topo
-		*topo = index->indexreg[local]->byteOffset; //atualiza o topo
-		removeIndex(index,local); //remove no indice primario
-
-		printf("REMOÇÃO FOI REALIZADA!\n");
-		return 1;
-	}
-
-	printf("REMOÇÃO NÃO FOI REALIZADA!\n");
-	return 0;
 }
