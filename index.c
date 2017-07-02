@@ -34,6 +34,7 @@ int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index){
 
 	// Procura o byte em que o registro deve ser inserido no arquivo de índice
 	insertIndex(index, insert);
+	orderIndex(index);
 
 	return TRUE;
 
@@ -48,10 +49,6 @@ int searchIndex(INDEX *index, int ticket){
 
 		middle = (first + last)/2;
 
-		//printf("Comparando %d com %d[%d]\n", ticket, index->indexReg[middle]->ticket, middle);
-
-		//if(middle+1 <= last && index->indexReg[middle]->ticket > ticket && index->indexReg[middle+1]->ticket < ticket)
-		//	return middle + 1;
 		if(index->indexReg[middle]->ticket < ticket)
 			first = middle + 1;
 		else if(index->indexReg[middle]->ticket == ticket)
@@ -69,8 +66,6 @@ int searchIndex(INDEX *index, int ticket){
 
 void insertAndShift(INDEX *index, INDEXREG* insert, int local){
 
-	//printf("vou inserir no local %d\n", local);
-
 	int i = index->size-1;
 	index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
 
@@ -84,17 +79,19 @@ void insertAndShift(INDEX *index, INDEXREG* insert, int local){
 
 }
 
-// Procura o byte em que um arquivo deve ser inserido.
+// Realiza a inserção no arquivo de índice.
 int insertIndex(INDEX *index, INDEXREG *insert){
 
-	index->indexReg = (INDEXREG**) realloc(index->indexReg,sizeof(INDEXREG*)*(index->size)+1);
+	index->indexReg = (INDEXREG**) realloc(index->indexReg,sizeof(INDEXREG*)*(index->size+1));
 	index->indexReg[index->size] = insert;
 	(index->size)++;
+
 }
 
 void Quick(INDEX* index, int inicio, int fim){
-	int pivo, aux, i, j, meio;
-   
+	int pivo, i, j, meio;
+   INDEXREG *aux;
+
 	i = inicio;
 	j = fim;
    
@@ -106,9 +103,9 @@ void Quick(INDEX* index, int inicio, int fim){
 		while (index->indexReg[j]->ticket > pivo) j = j - 1;
       
       	if(i <= j){
-        	aux = index->indexReg[i]->ticket;
-        	index->indexReg[i]->ticket = index->indexReg[j]->ticket;
-        	index->indexReg[j]->ticket = aux;
+        	aux = index->indexReg[i];
+        	index->indexReg[i] = index->indexReg[j];
+        	index->indexReg[j] = aux;
         	i = i + 1;
         	j = j - 1;
      	}
@@ -136,13 +133,36 @@ void removeIndex(INDEX* index, int local){
 // Exibe as estatísticas dos arquivos de índice.
 void showStatisticsIndex(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields){
 
-	printf("_________________________________________________________________________________\n");
-	printf("|		Quantidade de entradas no arquivo de índice			|\n");
-	printf("|_______________________________________________________________________________|\n");
-	printf("| Indicador de tamanho | Delimitador de registros  | Quantidade fixa de campos  |\n");
-	printf("|_______________________________________________________________________________|\n");
-	printf("|		%d 			%d	     			%d 	|\n", indexSizeIndicator->size, indexDelimiterRegister->size, indexFixedFields->size);
-	printf("|_______________________________________________________________________________|\n");
+	char enter;
+	int count = 0;
+
+	printf("Pressione ENTER para visualizar o próximo registro e 0 para voltar ao menu.\n\n");
+
+	printf(" -------------------------------------------------------------------------------------- \n");
+	printf("| Indicador de tamanho 	| Delimitador de registros  | Quantidade fixa de campos       \n");
+	printf("|--------------------------------------------------------------------------------------\n");
+	printf("| Registros: %d 	 	Registros: %d	     	Registros: %d 	     	  \n", indexSizeIndicator->size, indexDelimiterRegister->size, indexFixedFields->size);
+	printf("|--------------------------------------------------------------------------------------\n");
+	
+	scanf("%c", &enter);
+
+	// Imprime um registro por vez
+	while(enter == '\n' && count < indexSizeIndicator->size){
+		printf("| Ticket: %d 			", indexSizeIndicator->indexReg[count]->ticket);
+		printf("Ticket: %d 		", indexDelimiterRegister->indexReg[count]->ticket);
+		printf("Ticket: %d 			\n", indexFixedFields->indexReg[count]->ticket);
+		printf("| Byte offset: %d 		", indexSizeIndicator->indexReg[count]->byteOffset);
+		printf("Byte offset: %d 		", indexDelimiterRegister->indexReg[count]->byteOffset);
+		printf("Byte offset: %d 	\n", indexFixedFields->indexReg[count]->byteOffset);
+		printf("|--------------------------------------------------------------------------------------\n");
+		count++;
+		scanf("%c", &enter);
+	} 
+
+	if(count == indexSizeIndicator->size)
+		printf("Todos os registros impressos.\n\n");
+	else if(enter != '\n')
+		printf("Retorno ao menu principal.\n\n");
 
 }
 
@@ -173,7 +193,7 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	}
 
 	local = searchIndex(index,ticket); //faz a busca binaria no indice primario
-	//local++;
+
 	printf("TICKET ENCONTRADO NA POSIVCAO %d!\n",local);
 	if(ticket == index->indexReg[local]->ticket){
 		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro

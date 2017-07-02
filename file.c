@@ -37,17 +37,17 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 	FILE *fileFixedFields = fopen("indice-numero-fixo-campos.bin","wb");
 
 	if(registersFile == NULL){
-		printf("Erro ao abrir o arquivo solicitado.\n");
+		printf("Erro ao abrir o arquivo solicitado.\n\n");
 		return FALSE;
 	}
 
     if(sizeIndicator == NULL || delimiterRegister == NULL || fixedFields == NULL){
-        printf("Erro ao criar arquivos de saída.\n");
+        printf("Erro ao criar arquivos de saída.\n\n");
         return FALSE;
     }
 
     if(fileSizeIndicator == NULL || fileDelimiterRegister == NULL || fileFixedFields == NULL){
-        printf("Erro ao criar arquivos de índice.\n");
+        printf("Erro ao criar arquivos de índice.\n\n");
         return FALSE;
     }
 
@@ -96,7 +96,7 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 	orderIndex(indexDelimiterRegister);
 	orderIndex(indexFixedFields);
 
-	printIndexFile(indexSizeIndicator);
+//	printIndexFile(indexSizeIndicator);
 
     fclose(registersFile);
 
@@ -110,7 +110,7 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 
     free(regist);
 
-    printf("\nArquivo lido com sucesso. Criação de arquivos de saída efetuado.\n");
+    printf("\nArquivo lido com sucesso. Criação de arquivos de saída efetuado.\n\n");
     
     return TRUE;
 
