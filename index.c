@@ -48,7 +48,7 @@ int searchIndex(INDEX *index, int ticket){
 
 		middle = (first + last)/2;
 
-		printf("Comparando %d com %d[%d]\n", ticket, index->indexReg[middle]->ticket, middle);
+		//printf("Comparando %d com %d[%d]\n", ticket, index->indexReg[middle]->ticket, middle);
 
 		//if(middle+1 <= last && index->indexReg[middle]->ticket > ticket && index->indexReg[middle+1]->ticket < ticket)
 		//	return middle + 1;
@@ -59,7 +59,7 @@ int searchIndex(INDEX *index, int ticket){
 		else
 			last = middle - 1;
 
-		if(last <= first)
+		if(last < first)
 			return middle;
 
 	}
@@ -69,7 +69,7 @@ int searchIndex(INDEX *index, int ticket){
 
 void insertAndShift(INDEX *index, INDEXREG* insert, int local){
 
-	printf("vou inserir no local %d\n", local);
+	//printf("vou inserir no local %d\n", local);
 
 	int i = index->size-1;
 	index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
@@ -159,11 +159,22 @@ void deleteIndex(INDEX *index){
 
 }
 
-int removeRegister(INDEX* index, int ticket, FILE *output, int type, int *topo){
+int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	int local, aux, tamanho;
 	char asterisco = '*';
+	FILE *output = NULL;
+
+	if(type == 1) output = fopen("indicador-tamanho.bin","wb");
+	else if(type == 2) output = fopen("delimitador-registros.bin","wb");
+	else if(type == 3) output = fopen("numero-fixo-campos.bin","wb");
+	else{
+		printf("ERRO AO ABRIR O ARQUIVO DE DADOS!\n");
+		return 0;
+	}
 
 	local = searchIndex(index,ticket); //faz a busca binaria no indice primario
+	//local++;
+	printf("TICKET ENCONTRADO NA POSIVCAO %d!\n",local);
 	if(ticket == index->indexReg[local]->ticket){
 		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro
 		tamanho = sizeOfRegister(output, type); //verifica tamanho do registro

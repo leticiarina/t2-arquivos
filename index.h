@@ -24,7 +24,7 @@ void insertAndShift(INDEX *index, INDEXREG* insert, int local);
 int insertIndex(INDEX *index, INDEXREG *insert);
 void showStatisticsIndex(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields);
 void deleteIndex(INDEX *index);
-int removeRegister(INDEX* index, int ticket, FILE *output, int type, int *topo);
+int removeRegister(INDEX* index, int ticket, int type, int *topo);
 int sizeOfRegister(FILE *output, int type);
 void Quick(INDEX* index, int inicio, int fim);
 void orderIndex(INDEX *index);
