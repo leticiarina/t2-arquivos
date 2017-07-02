@@ -88,6 +88,16 @@ int insertIndex(INDEX *index, INDEXREG *insert){
 
 }
 
+void removeIndex(INDEX* index, int local){
+	int i = local;
+	while(i < index->size){
+		index->indexReg[i] = index->indexReg[i+1];
+		i++;
+	}
+	index->size--;
+	index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size));
+}
+
 void deleteIndex(INDEX *index){
 
 	int i;

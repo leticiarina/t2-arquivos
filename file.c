@@ -189,6 +189,27 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 
 }
 
-int removeRegisters(INDEX* indexSizeIndicator, INDEX* indexDelimiterRegister, INDEX* indexFixedFields){
-	
+int removeRegister(INDEX* index, int ticket, FILE *output, int *topo){
+	int local;
+	int aux;
+	char asterisco = '*';
+
+	local = searchIndex(index,ticket); //faz a busca binaria no indice primario
+	if(ticket == index->indexreg[local]->ticket){
+		//verifica tamanho do registro
+		
+			
+		fseek(output,indexreg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro
+		fwrite(&asterisco,1,sizeof(char),output); //insere o *
+		fwrite(&tamanho,1,sizeof(int),output); //insere o tamanho do registro
+		fwrite(topo,1,sizeof(int),output); //insere o antigo topo
+		*topo = index->indexreg[local]->byteOffset; //atualiza o topo
+		removeIndex(index,local); //remove no indice primario
+
+		printf("REMOÇÃO FOI REALIZADA!\n");
+		return 1;
+	}
+
+	printf("REMOÇÃO NÃO FOI REALIZADA!\n");
+	return 0;
 }
