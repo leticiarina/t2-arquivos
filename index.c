@@ -48,7 +48,7 @@ int searchIndex(INDEX *index, int ticket){
 
 		middle = (first + last)/2;
 
-		printf("Comparando %d com %d[%d]\n", ticket, index->indexReg[middle], middle);
+		printf("Comparando %d com %d[%d]\n", ticket, index->indexReg[middle]->ticket, middle);
 
 		//if(middle+1 <= last && index->indexReg[middle]->ticket > ticket && index->indexReg[middle+1]->ticket < ticket)
 		//	return middle + 1;
@@ -59,7 +59,7 @@ int searchIndex(INDEX *index, int ticket){
 		else
 			last = middle - 1;
 
-		if(first <= last)
+		if(last <= first)
 			return middle;
 
 	}
@@ -99,6 +99,32 @@ int insertIndex(INDEX *index, INDEXREG *insert){
 		insertAndShift(index, insert, local);	
 	}
 
+}
+
+int removeRegister(INDEX* index, int ticket, FILE *output, int *topo){
+	int local;
+	int aux;
+	char asterisco = '*';
+	int tamanho;
+
+	local = searchIndex(index,ticket); //faz a busca binaria no indice primario
+	if(ticket == index->indexReg[local]->ticket){
+		//verifica tamanho do registro
+		
+			
+		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro
+		fwrite(&asterisco,1,sizeof(char),output); //insere o *
+		fwrite(&tamanho,1,sizeof(int),output); //insere o tamanho do registro
+		fwrite(topo,1,sizeof(int),output); //insere o antigo topo
+		*topo = index->indexReg[local]->byteOffset; //atualiza o topo
+		removeIndex(index,local); //remove no indice primario
+
+		printf("REMOÇÃO FOI REALIZADA!\n");
+		return 1;
+	}
+
+	printf("REMOÇÃO NÃO FOI REALIZADA!\n");
+	return 0;
 }
 
 void removeIndex(INDEX* index, int local){
