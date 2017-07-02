@@ -1,6 +1,6 @@
-/* Donizeti Carlos dos Santos Junior	NUSP:
+/* Donizeti Carlos dos Santos Junior	NUSP: 9393882
 ** Gabriel Oliveira da Silva Hirga 		NUSP: 9278052
-** José Augusto Noronha de Menezes Neto	NUSP:
+** José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
 #include <stdlib.h>
@@ -261,13 +261,4 @@ int sizeOfRegister(FILE *output, int type){
 
 	}
 
-}
-
-void printIndexFile(INDEX* index){
-	int i;
-	printf("IMPRESSAO DO ARQUIVO INDICE:\n");
-	for(i = 0; i < index->size; i++){
-		printf("POSICAO: %d TICKET: %d BYTE OFFSET: %d\n",i,index->indexReg[i]->ticket,index->indexReg[i]->byteOffset);
-	}
-	printf("---------------------------------------\n");
 }

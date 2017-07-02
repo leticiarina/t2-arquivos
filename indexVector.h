@@ -1,6 +1,6 @@
-/* Donizeti Carlos dos Santos Junior	NUSP:
+/* Donizeti Carlos dos Santos Junior	NUSP: 9393882
 ** Gabriel Oliveira da Silva Hirga 		NUSP: 9278052
-** José Augusto Noronha de Menezes Neto	NUSP:
+** José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
 #ifndef _INDEX_VECTOR_H_
@@ -28,6 +28,5 @@ void removeIndexVector(INDEX* index, int local);
 int sizeOfRegister(FILE *output, int type);
 void Quick(INDEX* index, int inicio, int fim);
 void orderIndex(INDEX *index);
-void printIndexFile(INDEX* index);
 
 #endif

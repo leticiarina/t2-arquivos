@@ -1,6 +1,6 @@
-/* Donizeti Carlos dos Santos Junior	NUSP:
+/* Donizeti Carlos dos Santos Junior	NUSP: 9393882
 ** Gabriel Oliveira da Silva Hirga 		NUSP: 9278052
-** José Augusto Noronha de Menezes Neto	NUSP:
+** José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
 #include <stdio.h>
@@ -36,13 +36,13 @@ int main (int argc, char *argv[]){
 					printf("Erro na remoção. Ticket não encontrado.\n\n");
 				break;
 			case 3: 
-				printf("opção 3\n");
+				printf("opção 3\n"); // Inserção
 				break;
 			case 4: 
 				showStatisticsIndex(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 				break;
 			case 5:
-				printf("opção 5\n");
+				showRemovedStatistics(topo1, topo2, topo3);
 				break;
 		}
 

@@ -1,6 +1,6 @@
-/* Donizeti Carlos dos Santos Junior	NUSP:
+/* Donizeti Carlos dos Santos Junior	NUSP: 9393882
 ** Gabriel Oliveira da Silva Hirga 		NUSP: 9278052
-** José Augusto Noronha de Menezes Neto	NUSP:
+** José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
 #include <stdlib.h>
@@ -207,14 +207,14 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	FILE *indexFile = NULL;
 
 	if(type == 1) {
-		output = fopen("indicador-tamanho.bin","rb");
-		indexFile = fopen("indice-indicador-tamanho.bin", "rb");
+		output = fopen("indicador-tamanho.bin","ab+");
+		indexFile = fopen("indice-indicador-tamanho.bin", "wb");
 	} else if(type == 2) {
-		output = fopen("delimitador-registros.bin","rb");
-		indexFile = fopen("indice-delimitador-registros.bin","rb");
+		output = fopen("delimitador-registros.bin","ab+");
+		indexFile = fopen("indice-delimitador-registros.bin","wb");
 	} else if(type == 3) {
-		output = fopen("numero-fixo-campos.bin","rb");
-		indexFile = fopen("indice-numero-fixo-campos.bin","rb");
+		output = fopen("numero-fixo-campos.bin","ab+");
+		indexFile = fopen("indice-numero-fixo-campos.bin","wb");
 	} else{
 		printf("ERRO AO ABRIR O ARQUIVO DE DADOS!\n");
 		return 0;
@@ -237,4 +237,53 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	}
 
 	return FALSE;
+}
+
+void showRemovedStatistics(int topo1, int topo2, int topo3){
+
+	FILE *sizeIndicator = fopen("indicador-tamanho.bin","rb");
+	FILE *delimiterRegister = fopen("delimitador-registros.bin","rb");
+	FILE *fixedFields = fopen("numero-fixo-campos.bin","rb");
+
+	int size;
+	char ast;
+
+	if(topo1 == -1)
+		printf("Nenhum registro foi removido.\n\n");
+	
+	else {
+
+		// Coloca o ponteiro no byte com o tamanho do registro removido que está no topo
+		if(topo1 != -1)
+			fseek(sizeIndicator, topo1, SEEK_SET);
+		if(topo2 != -1)
+			fseek(delimiterRegister, topo2, SEEK_SET);
+		if(topo3 != -1)
+			fseek(fixedFields, topo3, SEEK_SET);
+			
+		fread(&ast, sizeof(char), 1, sizeIndicator);
+		printf("ast = %c ", ast);
+		fread(&ast, sizeof(char), 1, delimiterRegister);
+		printf("ast = %c ", ast);
+		fread(&ast, sizeof(char), 1, fixedFields);
+		printf("ast = %c \n", ast);
+
+		// Realiza a leitura do tamanho do registro em cada arquivo
+		printf("Estou nos bytes: %d %d %d\n", ftell(sizeIndicator), ftell(delimiterRegister), ftell(fixedFields));
+		fread(&size, sizeof(int), 1, sizeIndicator);
+		printf("Tamanho: %d", size);
+		fread(&size, sizeof(int), 1, delimiterRegister);
+		printf("Tamanho: %d", size);
+		fread(&size, sizeof(int), 1, fixedFields);
+		printf("Tamanho: %d\n", size);
+
+
+	}
+
+
+
+	fclose(sizeIndicator);
+	fclose(delimiterRegister);
+	fclose(fixedFields);	
+
 }
