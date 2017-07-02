@@ -1,0 +1,1212 @@
+valgrind ./t2
+Escolha a opção desejada:
+1. Leitura de registros a partir de um arquivo
+2. Remover registro
+3. Inserir registro
+4. Visualizar estatisticas sobre o arquivo de índice
+5. Visualizar estatísticas sobre as listas de registros removidos
+0. Sair
+Insira o nome do arquivo que deseja ler: Comparando 5379045 com 85874976[0]
+vou inserir no local 0
+Comparando 5379045 com 85875136[0]
+vou inserir no local 0
+Comparando 5379045 com 85875296[0]
+vou inserir no local 0
+Comparando 453438 com 85888704[0]
+vou inserir no local 0
+Comparando 453438 com 85888864[0]
+vou inserir no local 0
+Comparando 453438 com 85889024[0]
+vou inserir no local 0
+Comparando 784297 com 85888704[1]
+vou inserir no local 1
+Comparando 784297 com 85888864[1]
+vou inserir no local 1
+Comparando 784297 com 85889024[1]
+vou inserir no local 1
+Comparando 453442 com 85912896[1]
+vou inserir no local 1
+Comparando 453442 com 85913072[1]
+vou inserir no local 1
+Comparando 453442 com 85913248[1]
+vou inserir no local 1
+Comparando 0 com 85912896[2]
+vou inserir no local 2
+Comparando 0 com 85913072[2]
+vou inserir no local 2
+Comparando 0 com 85913248[2]
+vou inserir no local 2
+Comparando 135008 com 85935648[2]
+vou inserir no local 3
+Comparando 135008 com 85935840[2]
+vou inserir no local 3
+Comparando 135008 com 85936032[2]
+vou inserir no local 3
+Comparando 133801 com 85947024[3]
+vou inserir no local 3
+Comparando 133801 com 85947232[3]
+vou inserir no local 3
+Comparando 133801 com 85947440[3]
+vou inserir no local 3
+Comparando 5153 com 85957584[3]
+vou inserir no local 3
+Comparando 5153 com 85957792[3]
+vou inserir no local 3
+Comparando 5153 com 85958000[3]
+vou inserir no local 3
+Comparando 13971449 com 85957584[4]
+vou inserir no local 4
+Comparando 13971449 com 85957792[4]
+vou inserir no local 4
+Comparando 13971449 com 85958000[4]
+vou inserir no local 4
+Comparando 135007 com 85980368[4]
+vou inserir no local 4
+Comparando 135007 com 85980592[4]
+vou inserir no local 4
+Comparando 135007 com 85980816[4]
+vou inserir no local 4
+Comparando 7082360 com 85980368[5]
+vou inserir no local 5
+Comparando 7082360 com 85980592[5]
+vou inserir no local 5
+Comparando 7082360 com 85980816[5]
+vou inserir no local 5
+Comparando 139185 com 86002656[5]
+vou inserir no local 5
+Comparando 139185 com 86002896[5]
+vou inserir no local 5
+Comparando 139185 com 86003136[5]
+vou inserir no local 5
+Comparando 165937 com 86002656[6]
+vou inserir no local 6
+Comparando 165937 com 86002896[6]
+vou inserir no local 6
+Comparando 165937 com 86003136[6]
+vou inserir no local 6
+Comparando 1 com 86027120[6]
+vou inserir no local 6
+Comparando 1 com 86027376[6]
+vou inserir no local 6
+Comparando 1 com 86027632[6]
+vou inserir no local 6
+Comparando 83785 com 86027120[7]
+vou inserir no local 7
+Comparando 83785 com 86027376[7]
+vou inserir no local 7
+Comparando 83785 com 86027632[7]
+vou inserir no local 7
+Comparando 1373769 com 86049664[7]
+vou inserir no local 7
+Comparando 1373769 com 86049936[7]
+vou inserir no local 7
+Comparando 1373769 com 86050208[7]
+vou inserir no local 7
+Comparando 12785 com 86049664[8]
+vou inserir no local 8
+Comparando 12785 com 86049936[8]
+vou inserir no local 8
+Comparando 12785 com 86050208[8]
+vou inserir no local 8
+Comparando 145756 com 86076288[8]
+vou inserir no local 8
+Comparando 145756 com 86076576[8]
+vou inserir no local 8
+Comparando 145756 com 86076864[8]
+vou inserir no local 8
+Comparando 5443 com 86076288[9]
+vou inserir no local 9
+Comparando 5443 com 86076576[9]
+vou inserir no local 9
+Comparando 5443 com 86076864[9]
+vou inserir no local 9
+Comparando 2788606 com 86101680[9]
+vou inserir no local 9
+Comparando 2788606 com 86101984[9]
+vou inserir no local 9
+Comparando 2788606 com 86102288[9]
+vou inserir no local 9
+Comparando 500371 com 86101680[10]
+vou inserir no local 10
+Comparando 500371 com 86101984[10]
+vou inserir no local 10
+Comparando 500371 com 86102288[10]
+vou inserir no local 10
+Comparando 28066 com 86128928[10]
+vou inserir no local 10
+Comparando 28066 com 86129248[10]
+vou inserir no local 10
+Comparando 28066 com 86129568[10]
+vou inserir no local 10
+Comparando 523307 com 86128928[11]
+vou inserir no local 11
+Comparando 523307 com 86129248[11]
+vou inserir no local 11
+Comparando 523307 com 86129568[11]
+vou inserir no local 11
+Comparando 95976 com 86152272[11]
+vou inserir no local 11
+Comparando 95976 com 86152608[11]
+vou inserir no local 11
+Comparando 95976 com 86152944[11]
+vou inserir no local 11
+Comparando 104099 com 86152272[12]
+vou inserir no local 12
+Comparando 104099 com 86152608[12]
+vou inserir no local 12
+Comparando 104099 com 86152944[12]
+vou inserir no local 12
+Comparando 460087 com 86179536[12]
+vou inserir no local 13
+Comparando 460087 com 86179888[12]
+vou inserir no local 13
+Comparando 460087 com 86180240[12]
+vou inserir no local 13
+Comparando 204971 com 86192544[13]
+vou inserir no local 13
+Comparando 204971 com 86192912[13]
+vou inserir no local 13
+Comparando 204971 com 86193280[13]
+vou inserir no local 13
+Comparando 85216 com 86207408[13]
+vou inserir no local 13
+Comparando 85216 com 86207776[13]
+vou inserir no local 13
+Comparando 85216 com 86208144[13]
+vou inserir no local 13
+Comparando 9323584 com 86207408[14]
+vou inserir no local 14
+Comparando 9323584 com 86207776[14]
+vou inserir no local 14
+Comparando 9323584 com 86208144[14]
+vou inserir no local 14
+Comparando 7629594 com 86232704[14]
+vou inserir no local 14
+Comparando 7629594 com 86233088[14]
+vou inserir no local 14
+Comparando 7629594 com 86233472[14]
+vou inserir no local 14
+Comparando 866902 com 86232704[15]
+vou inserir no local 15
+Comparando 866902 com 86233088[15]
+vou inserir no local 15
+Comparando 866902 com 86233472[15]
+vou inserir no local 15
+Comparando 89158 com 86256336[15]
+vou inserir no local 15
+Comparando 89158 com 86256736[15]
+vou inserir no local 15
+Comparando 89158 com 86257136[15]
+vou inserir no local 15
+Comparando 1236028 com 86256336[16]
+vou inserir no local 17
+Comparando 1236028 com 86256736[16]
+vou inserir no local 17
+Comparando 1236028 com 86257136[16]
+vou inserir no local 17
+Comparando 1480690 com 86256336[16]
+vou inserir no local 16
+Comparando 1480690 com 86256736[16]
+vou inserir no local 16
+Comparando 1480690 com 86257136[16]
+vou inserir no local 16
+Comparando 449661 com 86256336[17]
+vou inserir no local 17
+Comparando 449661 com 86256736[17]
+vou inserir no local 17
+Comparando 449661 com 86257136[17]
+vou inserir no local 17
+Comparando 357901 com 86304160[17]
+vou inserir no local 17
+Comparando 357901 com 86304592[17]
+vou inserir no local 17
+Comparando 357901 com 86305024[17]
+vou inserir no local 17
+Comparando 1008124 com 86304160[18]
+vou inserir no local 18
+Comparando 1008124 com 86304592[18]
+vou inserir no local 18
+Comparando 1008124 com 86305024[18]
+vou inserir no local 18
+Comparando 1012775 com 86331488[18]
+vou inserir no local 18
+Comparando 1012775 com 86331936[18]
+vou inserir no local 18
+Comparando 1012775 com 86332384[18]
+vou inserir no local 18
+Comparando 719691 com 86331488[19]
+vou inserir no local 19
+Comparando 719691 com 86331936[19]
+vou inserir no local 19
+Comparando 719691 com 86332384[19]
+vou inserir no local 19
+Comparando 719697 com 86362448[19]
+vou inserir no local 20
+Comparando 719697 com 86362912[19]
+vou inserir no local 20
+Comparando 719697 com 86363376[19]
+vou inserir no local 20
+Comparando 719666 com 86378000[20]
+vou inserir no local 20
+Comparando 719666 com 86378480[20]
+vou inserir no local 20
+Comparando 719666 com 86378960[20]
+vou inserir no local 20
+Comparando 21425 com 86392928[20]
+vou inserir no local 20
+Comparando 21425 com 86393408[20]
+vou inserir no local 20
+Comparando 21425 com 86393888[20]
+vou inserir no local 20
+Comparando 719669 com 86392928[21]
+vou inserir no local 22
+Comparando 719669 com 86393408[21]
+vou inserir no local 22
+Comparando 719669 com 86393888[21]
+vou inserir no local 22
+Comparando 719687 com 86392928[21]
+vou inserir no local 21
+Comparando 719687 com 86393408[21]
+vou inserir no local 21
+Comparando 719687 com 86393888[21]
+vou inserir no local 21
+Comparando 596093 com 86392928[22]
+vou inserir no local 22
+Comparando 596093 com 86393408[22]
+vou inserir no local 22
+Comparando 596093 com 86393888[22]
+vou inserir no local 22
+Comparando 639230 com 86449552[22]
+vou inserir no local 23
+Comparando 639230 com 86450064[22]
+vou inserir no local 23
+Comparando 639230 com 86450576[22]
+vou inserir no local 23
+Comparando 810126 com 86463616[23]
+vou inserir no local 23
+Comparando 810126 com 86464144[23]
+vou inserir no local 23
+Comparando 810126 com 86464672[23]
+vou inserir no local 23
+Comparando 414884 com 86475888[23]
+vou inserir no local 23
+Comparando 414884 com 86476416[23]
+vou inserir no local 23
+Comparando 414884 com 86476944[23]
+vou inserir no local 23
+Comparando 414885 com 86475888[24]
+vou inserir no local 24
+Comparando 414885 com 86476416[24]
+vou inserir no local 24
+Comparando 414885 com 86476944[24]
+vou inserir no local 24
+Comparando 714185 com 86503584[24]
+vou inserir no local 25
+Comparando 714185 com 86504128[24]
+vou inserir no local 25
+Comparando 714185 com 86504672[24]
+vou inserir no local 25
+Comparando 122146 com 86515488[25]
+vou inserir no local 25
+Comparando 122146 com 86516048[25]
+vou inserir no local 25
+Comparando 122146 com 86516608[25]
+vou inserir no local 25
+Comparando 396358 com 86528784[25]
+vou inserir no local 26
+Comparando 396358 com 86529344[25]
+vou inserir no local 26
+Comparando 396358 com 86529904[25]
+vou inserir no local 26
+Comparando 2 com 86541344[26]
+vou inserir no local 26
+Comparando 2 com 86541920[26]
+vou inserir no local 26
+Comparando 2 com 86542496[26]
+vou inserir no local 26
+Comparando 414887 com 86554528[26]
+vou inserir no local 26
+Comparando 414887 com 86555104[26]
+vou inserir no local 26
+Comparando 414887 com 86555680[26]
+vou inserir no local 26
+Comparando 414889 com 86554528[27]
+vou inserir no local 27
+Comparando 414889 com 86555104[27]
+vou inserir no local 27
+Comparando 414889 com 86555680[27]
+vou inserir no local 27
+Comparando 1546935 com 86582512[27]
+vou inserir no local 27
+Comparando 1546935 com 86583104[27]
+vou inserir no local 27
+Comparando 1546935 com 86583696[27]
+vou inserir no local 27
+Comparando 1546938 com 86582512[28]
+vou inserir no local 28
+Comparando 1546938 com 86583104[28]
+vou inserir no local 28
+Comparando 1546938 com 86583696[28]
+vou inserir no local 28
+Comparando 15397059 com 86610400[28]
+vou inserir no local 28
+Comparando 15397059 com 86611008[28]
+vou inserir no local 28
+Comparando 15397059 com 86611616[28]
+vou inserir no local 28
+Comparando 53140 com 86610400[29]
+vou inserir no local 29
+Comparando 53140 com 86611008[29]
+vou inserir no local 29
+Comparando 53140 com 86611616[29]
+vou inserir no local 29
+Comparando 2119071 com 86635184[29]
+vou inserir no local 29
+Comparando 2119071 com 86635808[29]
+vou inserir no local 29
+Comparando 2119071 com 86636432[29]
+vou inserir no local 29
+Comparando 53141 com 86635184[30]
+vou inserir no local 31
+Comparando 53141 com 86635808[30]
+vou inserir no local 31
+Comparando 53141 com 86636432[30]
+vou inserir no local 31
+Comparando 120970 com 86635184[30]
+vou inserir no local 30
+Comparando 120970 com 86635808[30]
+vou inserir no local 30
+Comparando 120970 com 86636432[30]
+vou inserir no local 30
+Comparando 8785977 com 86635184[31]
+vou inserir no local 31
+Comparando 8785977 com 86635808[31]
+vou inserir no local 31
+Comparando 8785977 com 86636432[31]
+vou inserir no local 31
+Comparando 14823420 com 86687888[31]
+vou inserir no local 31
+Comparando 14823420 com 86688544[31]
+vou inserir no local 31
+Comparando 14823420 com 86689200[31]
+vou inserir no local 31
+Comparando 14436705 com 86687888[32]
+vou inserir no local 32
+Comparando 14436705 com 86688544[32]
+vou inserir no local 32
+Comparando 14436705 com 86689200[32]
+vou inserir no local 32
+Comparando 223289 com 86714816[32]
+vou inserir no local 32
+Comparando 223289 com 86715488[32]
+vou inserir no local 32
+Comparando 223289 com 86716160[32]
+vou inserir no local 32
+Comparando 14436714 com 86714816[33]
+vou inserir no local 33
+Comparando 14436714 com 86715488[33]
+vou inserir no local 33
+Comparando 14436714 com 86716160[33]
+vou inserir no local 33
+Comparando 3 com 86740688[33]
+vou inserir no local 33
+Comparando 3 com 86741376[33]
+vou inserir no local 33
+Comparando 3 com 86742064[33]
+vou inserir no local 33
+Comparando 13323025 com 86740688[34]
+vou inserir no local 34
+Comparando 13323025 com 86741376[34]
+vou inserir no local 34
+Comparando 13323025 com 86742064[34]
+vou inserir no local 34
+Comparando 5512241 com 86764896[34]
+vou inserir no local 34
+Comparando 5512241 com 86765600[34]
+vou inserir no local 34
+Comparando 5512241 com 86766304[34]
+vou inserir no local 34
+Comparando 223294 com 86764896[35]
+vou inserir no local 35
+Comparando 223294 com 86765600[35]
+vou inserir no local 35
+Comparando 223294 com 86766304[35]
+vou inserir no local 35
+Comparando 13323021 com 86789520[35]
+vou inserir no local 36
+Comparando 13323021 com 86790240[35]
+vou inserir no local 36
+Comparando 13323021 com 86790960[35]
+vou inserir no local 36
+Comparando 689142 com 86802576[36]
+vou inserir no local 36
+Comparando 689142 com 86803312[36]
+vou inserir no local 36
+Comparando 689142 com 86804048[36]
+vou inserir no local 36
+Comparando 323560 com 86816960[36]
+vou inserir no local 36
+Comparando 323560 com 86817696[36]
+vou inserir no local 36
+Comparando 323560 com 86818432[36]
+vou inserir no local 36
+Comparando 323559 com 86816960[37]
+vou inserir no local 37
+Comparando 323559 com 86817696[37]
+vou inserir no local 37
+Comparando 323559 com 86818432[37]
+vou inserir no local 37
+Comparando 323555 com 86841072[37]
+vou inserir no local 37
+Comparando 323555 com 86841824[37]
+vou inserir no local 37
+Comparando 323555 com 86842576[37]
+vou inserir no local 37
+Comparando 323558 com 86841072[38]
+vou inserir no local 38
+Comparando 323558 com 86841824[38]
+vou inserir no local 38
+Comparando 323558 com 86842576[38]
+vou inserir no local 38
+Comparando 323556 com 86866544[38]
+vou inserir no local 38
+Comparando 323556 com 86867312[38]
+vou inserir no local 38
+Comparando 323556 com 86868080[38]
+vou inserir no local 38
+Comparando 323557 com 86866544[39]
+vou inserir no local 39
+Comparando 323557 com 86867312[39]
+vou inserir no local 39
+Comparando 323557 com 86868080[39]
+vou inserir no local 39
+Comparando 323554 com 86891104[39]
+vou inserir no local 39
+Comparando 323554 com 86891888[39]
+vou inserir no local 39
+Comparando 323554 com 86892672[39]
+vou inserir no local 39
+Comparando 323561 com 86891104[40]
+vou inserir no local 40
+Comparando 323561 com 86891888[40]
+vou inserir no local 40
+Comparando 323561 com 86892672[40]
+vou inserir no local 40
+Comparando 323553 com 86917520[40]
+vou inserir no local 40
+Comparando 323553 com 86918320[40]
+vou inserir no local 40
+Comparando 323553 com 86919120[40]
+vou inserir no local 40
+Comparando 323562 com 86917520[41]
+vou inserir no local 41
+Comparando 323562 com 86918320[41]
+vou inserir no local 41
+Comparando 323562 com 86919120[41]
+vou inserir no local 41
+Comparando 399411 com 86944256[41]
+vou inserir no local 41
+Comparando 399411 com 86945072[41]
+vou inserir no local 41
+Comparando 399411 com 86945888[41]
+vou inserir no local 41
+Comparando 399412 com 86944256[42]
+vou inserir no local 42
+Comparando 399412 com 86945072[42]
+vou inserir no local 42
+Comparando 399412 com 86945888[42]
+vou inserir no local 42
+Comparando 399413 com 86969152[42]
+vou inserir no local 42
+Comparando 399413 com 86969984[42]
+vou inserir no local 42
+Comparando 399413 com 86970816[42]
+vou inserir no local 42
+Comparando 399414 com 86969152[43]
+vou inserir no local 43
+Comparando 399414 com 86969984[43]
+vou inserir no local 43
+Comparando 399414 com 86970816[43]
+vou inserir no local 43
+Comparando 399415 com 86995504[43]
+vou inserir no local 43
+Comparando 399415 com 86996352[43]
+vou inserir no local 43
+Comparando 399415 com 86997200[43]
+vou inserir no local 43
+Comparando 399416 com 86995504[44]
+vou inserir no local 44
+Comparando 399416 com 86996352[44]
+vou inserir no local 44
+Comparando 399416 com 86997200[44]
+vou inserir no local 44
+Comparando 399419 com 87020800[44]
+vou inserir no local 44
+Comparando 399419 com 87021664[44]
+vou inserir no local 44
+Comparando 399419 com 87022528[44]
+vou inserir no local 44
+Comparando 399420 com 87020800[45]
+vou inserir no local 45
+Comparando 399420 com 87021664[45]
+vou inserir no local 45
+Comparando 399420 com 87022528[45]
+vou inserir no local 45
+Comparando 1337598 com 87047248[45]
+vou inserir no local 45
+Comparando 1337598 com 87048128[45]
+vou inserir no local 45
+Comparando 1337598 com 87049008[45]
+vou inserir no local 45
+Comparando 399421 com 87047248[46]
+vou inserir no local 46
+Comparando 399421 com 87048128[46]
+vou inserir no local 46
+Comparando 399421 com 87049008[46]
+vou inserir no local 46
+Comparando 399422 com 87073504[46]
+vou inserir no local 46
+Comparando 399422 com 87074400[46]
+vou inserir no local 46
+Comparando 399422 com 87075296[46]
+vou inserir no local 46
+Comparando 399383 com 87073504[47]
+vou inserir no local 47
+Comparando 399383 com 87074400[47]
+vou inserir no local 47
+Comparando 399383 com 87075296[47]
+vou inserir no local 47
+Comparando 399386 com 87101488[47]
+vou inserir no local 48
+Comparando 399386 com 87102400[47]
+vou inserir no local 48
+Comparando 399386 com 87103312[47]
+vou inserir no local 48
+Comparando 399389 com 87115024[48]
+vou inserir no local 49
+Comparando 399389 com 87115952[48]
+vou inserir no local 49
+Comparando 399389 com 87116880[48]
+vou inserir no local 49
+Comparando 399390 com 87115024[48]
+vou inserir no local 48
+Comparando 399390 com 87115952[48]
+vou inserir no local 48
+Comparando 399390 com 87116880[48]
+vou inserir no local 48
+Comparando 399404 com 87115024[49]
+vou inserir no local 49
+Comparando 399404 com 87115952[49]
+vou inserir no local 49
+Comparando 399404 com 87116880[49]
+vou inserir no local 49
+Comparando 399405 com 87154080[49]
+vou inserir no local 49
+Comparando 399405 com 87155024[49]
+vou inserir no local 49
+Comparando 399405 com 87155968[49]
+vou inserir no local 49
+Comparando 399406 com 87154080[50]
+vou inserir no local 50
+Comparando 399406 com 87155024[50]
+vou inserir no local 50
+Comparando 399406 com 87155968[50]
+vou inserir no local 50
+Comparando 399407 com 87180032[50]
+vou inserir no local 50
+Comparando 399407 com 87180992[50]
+vou inserir no local 50
+Comparando 399407 com 87181952[50]
+vou inserir no local 50
+Comparando 399409 com 87180032[51]
+vou inserir no local 51
+Comparando 399409 com 87180992[51]
+vou inserir no local 51
+Comparando 399409 com 87181952[51]
+vou inserir no local 51
+Comparando 399410 com 87207728[51]
+vou inserir no local 51
+Comparando 399410 com 87208704[51]
+vou inserir no local 51
+Comparando 399410 com 87209680[51]
+vou inserir no local 51
+Comparando 323563 com 87207728[52]
+vou inserir no local 52
+Comparando 323563 com 87208704[52]
+vou inserir no local 52
+Comparando 323563 com 87209680[52]
+vou inserir no local 52
+Comparando 1850408 com 87235040[52]
+vou inserir no local 52
+Comparando 1850408 com 87236032[52]
+vou inserir no local 52
+Comparando 1850408 com 87237024[52]
+vou inserir no local 52
+Comparando 323569 com 87235040[53]
+vou inserir no local 54
+Comparando 323569 com 87236032[53]
+vou inserir no local 54
+Comparando 323569 com 87237024[53]
+vou inserir no local 54
+Comparando 323575 com 87235040[53]
+vou inserir no local 53
+Comparando 323575 com 87236032[53]
+vou inserir no local 53
+Comparando 323575 com 87237024[53]
+vou inserir no local 53
+Comparando 323570 com 87235040[54]
+vou inserir no local 54
+Comparando 323570 com 87236032[54]
+vou inserir no local 54
+Comparando 323570 com 87237024[54]
+vou inserir no local 54
+Comparando 323571 com 87289584[54]
+vou inserir no local 54
+Comparando 323571 com 87290608[54]
+vou inserir no local 54
+Comparando 323571 com 87291632[54]
+vou inserir no local 54
+Comparando 1850414 com 87289584[55]
+vou inserir no local 55
+Comparando 1850414 com 87290608[55]
+vou inserir no local 55
+Comparando 1850414 com 87291632[55]
+vou inserir no local 55
+Comparando 323567 com 87317952[55]
+vou inserir no local 55
+Comparando 323567 com 87318992[55]
+vou inserir no local 55
+Comparando 323567 com 87320032[55]
+vou inserir no local 55
+Comparando 323577 com 87317952[56]
+vou inserir no local 56
+Comparando 323577 com 87318992[56]
+vou inserir no local 56
+Comparando 323577 com 87320032[56]
+vou inserir no local 56
+Comparando 323580 com 87343216[56]
+vou inserir no local 57
+Comparando 323580 com 87344272[56]
+vou inserir no local 57
+Comparando 323580 com 87345328[56]
+vou inserir no local 57
+Comparando 323568 com 87357184[57]
+vou inserir no local 57
+Comparando 323568 com 87358256[57]
+vou inserir no local 57
+Comparando 323568 com 87359328[57]
+vou inserir no local 57
+Comparando 323565 com 87370656[57]
+vou inserir no local 57
+Comparando 323565 com 87371728[57]
+vou inserir no local 57
+Comparando 323565 com 87372800[57]
+vou inserir no local 57
+Comparando 399423 com 87370656[58]
+vou inserir no local 58
+Comparando 399423 com 87371728[58]
+vou inserir no local 58
+Comparando 399423 com 87372800[58]
+vou inserir no local 58
+Comparando 399424 com 87398192[58]
+vou inserir no local 58
+Comparando 399424 com 87399280[58]
+vou inserir no local 58
+Comparando 399424 com 87400368[58]
+vou inserir no local 58
+Comparando 399425 com 87398192[59]
+vou inserir no local 59
+Comparando 399425 com 87399280[59]
+vou inserir no local 59
+Comparando 399425 com 87400368[59]
+vou inserir no local 59
+Comparando 399426 com 87426368[59]
+vou inserir no local 59
+Comparando 399426 com 87427472[59]
+vou inserir no local 59
+Comparando 399426 com 87428576[59]
+vou inserir no local 59
+Comparando 399427 com 87426368[60]
+vou inserir no local 60
+Comparando 399427 com 87427472[60]
+vou inserir no local 60
+Comparando 399427 com 87428576[60]
+vou inserir no local 60
+Comparando 399428 com 87452112[60]
+vou inserir no local 60
+Comparando 399428 com 87453232[60]
+vou inserir no local 60
+Comparando 399428 com 87454352[60]
+vou inserir no local 60
+Comparando 399429 com 87452112[61]
+vou inserir no local 61
+Comparando 399429 com 87453232[61]
+vou inserir no local 61
+Comparando 399429 com 87454352[61]
+vou inserir no local 61
+Comparando 399431 com 87481440[61]
+vou inserir no local 61
+Comparando 399431 com 87482576[61]
+vou inserir no local 61
+Comparando 399431 com 87483712[61]
+vou inserir no local 61
+Comparando 1342309 com 87481440[62]
+vou inserir no local 62
+Comparando 1342309 com 87482576[62]
+vou inserir no local 62
+Comparando 1342309 com 87483712[62]
+vou inserir no local 62
+Comparando 399432 com 87509616[62]
+vou inserir no local 62
+Comparando 399432 com 87510768[62]
+vou inserir no local 62
+Comparando 399432 com 87511920[62]
+vou inserir no local 62
+Comparando 399433 com 87509616[63]
+vou inserir no local 63
+Comparando 399433 com 87510768[63]
+vou inserir no local 63
+Comparando 399433 com 87511920[63]
+vou inserir no local 63
+Comparando 1342303 com 87537984[63]
+vou inserir no local 64
+Comparando 1342303 com 87539152[63]
+vou inserir no local 64
+Comparando 1342303 com 87540320[63]
+vou inserir no local 64
+Comparando 628476 com 87550736[64]
+vou inserir no local 64
+Comparando 628476 com 87551920[64]
+vou inserir no local 64
+Comparando 628476 com 87553104[64]
+vou inserir no local 64
+Comparando 650493 com 87564800[64]
+vou inserir no local 65
+Comparando 650493 com 87565984[64]
+vou inserir no local 65
+Comparando 650493 com 87567168[64]
+vou inserir no local 65
+Comparando 650495 com 87579056[65]
+vou inserir no local 66
+Comparando 650495 com 87580256[65]
+vou inserir no local 66
+Comparando 650495 com 87581456[65]
+vou inserir no local 66
+Comparando 628473 com 87579056[65]
+vou inserir no local 65
+Comparando 628473 com 87580256[65]
+vou inserir no local 65
+Comparando 628473 com 87581456[65]
+vou inserir no local 65
+Comparando 685789 com 87579056[66]
+vou inserir no local 66
+Comparando 685789 com 87580256[66]
+vou inserir no local 66
+Comparando 685789 com 87581456[66]
+vou inserir no local 66
+Comparando 685791 com 87621840[66]
+vou inserir no local 66
+Comparando 685791 com 87623056[66]
+vou inserir no local 66
+Comparando 685791 com 87624272[66]
+vou inserir no local 66
+Comparando 685790 com 87621840[67]
+vou inserir no local 67
+Comparando 685790 com 87623056[67]
+vou inserir no local 67
+Comparando 685790 com 87624272[67]
+vou inserir no local 67
+Comparando 768337 com 87651264[67]
+vou inserir no local 67
+Comparando 768337 com 87652496[67]
+vou inserir no local 67
+Comparando 768337 com 87653728[67]
+vou inserir no local 67
+Comparando 650496 com 87651264[68]
+vou inserir no local 68
+Comparando 650496 com 87652496[68]
+vou inserir no local 68
+Comparando 650496 com 87653728[68]
+vou inserir no local 68
+Comparando 650497 com 87680400[68]
+vou inserir no local 69
+Comparando 650497 com 87681648[68]
+vou inserir no local 69
+Comparando 650497 com 87682896[68]
+vou inserir no local 69
+Comparando 20961 com 87694944[69]
+vou inserir no local 69
+Comparando 20961 com 87696208[69]
+vou inserir no local 69
+Comparando 20961 com 87697472[69]
+vou inserir no local 69
+Comparando 3957938 com 87710432[69]
+vou inserir no local 69
+Comparando 3957938 com 87711696[69]
+vou inserir no local 69
+Comparando 3957938 com 87712960[69]
+vou inserir no local 69
+Comparando 11611 com 87710432[70]
+vou inserir no local 70
+Comparando 11611 com 87711696[70]
+vou inserir no local 70
+Comparando 11611 com 87712960[70]
+vou inserir no local 70
+Comparando 146549 com 87741936[70]
+vou inserir no local 70
+Comparando 146549 com 87743216[70]
+vou inserir no local 70
+Comparando 146549 com 87744496[70]
+vou inserir no local 70
+Comparando 123516 com 87741936[71]
+vou inserir no local 71
+Comparando 123516 com 87743216[71]
+vou inserir no local 71
+Comparando 123516 com 87744496[71]
+vou inserir no local 71
+Comparando 99023 com 87772080[71]
+vou inserir no local 71
+Comparando 99023 com 87773376[71]
+vou inserir no local 71
+Comparando 99023 com 87774672[71]
+vou inserir no local 71
+Comparando 124561 com 87772080[72]
+vou inserir no local 72
+Comparando 124561 com 87773376[72]
+vou inserir no local 72
+Comparando 124561 com 87774672[72]
+vou inserir no local 72
+Comparando 35177 com 87805408[72]
+vou inserir no local 72
+Comparando 35177 com 87806720[72]
+vou inserir no local 72
+Comparando 35177 com 87808032[72]
+vou inserir no local 72
+Comparando 4136215 com 87805408[73]
+vou inserir no local 73
+Comparando 4136215 com 87806720[73]
+vou inserir no local 73
+Comparando 4136215 com 87808032[73]
+vou inserir no local 73
+Comparando 957607 com 87837456[73]
+vou inserir no local 73
+Comparando 957607 com 87838784[73]
+vou inserir no local 73
+Comparando 957607 com 87840112[73]
+vou inserir no local 73
+Comparando 825078 com 87837456[74]
+vou inserir no local 74
+Comparando 825078 com 87838784[74]
+vou inserir no local 74
+Comparando 825078 com 87840112[74]
+vou inserir no local 74
+Comparando 944603 com 87864320[74]
+vou inserir no local 75
+Comparando 944603 com 87865664[74]
+vou inserir no local 75
+Comparando 944603 com 87867008[74]
+vou inserir no local 75
+Comparando 2800307 com 87880064[75]
+vou inserir no local 76
+Comparando 2800307 com 87881424[75]
+vou inserir no local 76
+Comparando 2800307 com 87882784[75]
+vou inserir no local 76
+Comparando 12368464 com 87880064[75]
+vou inserir no local 75
+Comparando 12368464 com 87881424[75]
+vou inserir no local 75
+Comparando 12368464 com 87882784[75]
+vou inserir no local 75
+Comparando 11895940 com 87880064[76]
+vou inserir no local 76
+Comparando 11895940 com 87881424[76]
+vou inserir no local 76
+Comparando 11895940 com 87882784[76]
+vou inserir no local 76
+Comparando 24188 com 87924480[76]
+vou inserir no local 76
+Comparando 24188 com 87925856[76]
+vou inserir no local 76
+Comparando 24188 com 87927232[76]
+vou inserir no local 76
+Comparando 24189 com 87924480[77]
+vou inserir no local 77
+Comparando 24189 com 87925856[77]
+vou inserir no local 77
+Comparando 24189 com 87927232[77]
+vou inserir no local 77
+Comparando 15887965 com 87953488[77]
+vou inserir no local 77
+Comparando 15887965 com 87954880[77]
+vou inserir no local 77
+Comparando 15887965 com 87956272[77]
+vou inserir no local 77
+Comparando 5829920 com 87953488[78]
+vou inserir no local 79
+Comparando 5829920 com 87954880[78]
+vou inserir no local 79
+Comparando 5829920 com 87956272[78]
+vou inserir no local 79
+Comparando 1105216 com 87953488[78]
+vou inserir no local 79
+Comparando 1105216 com 87954880[78]
+vou inserir no local 79
+Comparando 1105216 com 87956272[78]
+vou inserir no local 79
+Comparando 10171985 com 87997904[79]
+vou inserir no local 79
+Comparando 10171985 com 87999328[79]
+vou inserir no local 79
+Comparando 10171985 com 88000752[79]
+vou inserir no local 79
+Comparando 5135023 com 88012288[79]
+vou inserir no local 79
+Comparando 5135023 com 88013712[79]
+vou inserir no local 79
+Comparando 5135023 com 88015136[79]
+vou inserir no local 79
+Comparando 5148848 com 88012288[80]
+vou inserir no local 80
+Comparando 5148848 com 88013712[80]
+vou inserir no local 80
+Comparando 5148848 com 88015136[80]
+vou inserir no local 80
+Comparando 1940214 com 88042176[80]
+vou inserir no local 80
+Comparando 1940214 com 88043616[80]
+vou inserir no local 80
+Comparando 1940214 com 88045056[80]
+vou inserir no local 80
+Comparando 14062641 com 88042176[81]
+vou inserir no local 81
+Comparando 14062641 com 88043616[81]
+vou inserir no local 81
+Comparando 14062641 com 88045056[81]
+vou inserir no local 81
+Comparando 15430403 com 88071488[81]
+vou inserir no local 81
+Comparando 15430403 com 88072944[81]
+vou inserir no local 81
+Comparando 15430403 com 88074400[81]
+vou inserir no local 81
+Comparando 16163755 com 88071488[82]
+vou inserir no local 82
+Comparando 16163755 com 88072944[82]
+vou inserir no local 82
+Comparando 16163755 com 88074400[82]
+vou inserir no local 82
+Comparando 1073518 com 88103408[82]
+vou inserir no local 82
+Comparando 1073518 com 88104880[82]
+vou inserir no local 82
+Comparando 1073518 com 88106352[82]
+vou inserir no local 82
+Comparando 16167275 com 88103408[83]
+vou inserir no local 83
+Comparando 16167275 com 88104880[83]
+vou inserir no local 83
+Comparando 16167275 com 88106352[83]
+vou inserir no local 83
+Comparando 11895959 com 88131040[83]
+vou inserir no local 83
+Comparando 11895959 com 88132528[83]
+vou inserir no local 83
+Comparando 11895959 com 88134016[83]
+vou inserir no local 83
+Comparando 3962921 com 88131040[84]
+vou inserir no local 84
+Comparando 3962921 com 88132528[84]
+vou inserir no local 84
+Comparando 3962921 com 88134016[84]
+vou inserir no local 84
+Comparando 3955204 com 88161232[84]
+vou inserir no local 84
+Comparando 3955204 com 88162736[84]
+vou inserir no local 84
+Comparando 3955204 com 88164240[84]
+vou inserir no local 84
+Comparando 5419701 com 88161232[85]
+vou inserir no local 86
+Comparando 5419701 com 88162736[85]
+vou inserir no local 86
+Comparando 5419701 com 88164240[85]
+vou inserir no local 86
+Comparando 2478043 com 88161232[85]
+vou inserir no local 85
+Comparando 2478043 com 88162736[85]
+vou inserir no local 85
+Comparando 2478043 com 88164240[85]
+vou inserir no local 85
+Comparando 5206019 com 88161232[86]
+vou inserir no local 87
+Comparando 5206019 com 88162736[86]
+vou inserir no local 87
+Comparando 5206019 com 88164240[86]
+vou inserir no local 87
+Comparando 9831924 com 88161232[86]
+vou inserir no local 86
+Comparando 9831924 com 88162736[86]
+vou inserir no local 86
+Comparando 9831924 com 88164240[86]
+vou inserir no local 86
+Comparando 16424434 com 88161232[87]
+vou inserir no local 87
+Comparando 16424434 com 88162736[87]
+vou inserir no local 87
+Comparando 16424434 com 88164240[87]
+vou inserir no local 87
+Comparando 6787 com 88254480[87]
+vou inserir no local 87
+Comparando 6787 com 88256032[87]
+vou inserir no local 87
+Comparando 6787 com 88257584[87]
+vou inserir no local 87
+Comparando 3736210 com 88254480[88]
+vou inserir no local 88
+Comparando 3736210 com 88256032[88]
+vou inserir no local 88
+Comparando 3736210 com 88257584[88]
+vou inserir no local 88
+Comparando 16161706 com 88284176[88]
+vou inserir no local 89
+Comparando 16161706 com 88285744[88]
+vou inserir no local 89
+Comparando 16161706 com 88287312[88]
+vou inserir no local 89
+Comparando 276235 com 88298992[89]
+vou inserir no local 89
+Comparando 276235 com 88300576[89]
+vou inserir no local 89
+Comparando 276235 com 88302160[89]
+vou inserir no local 89
+Comparando 337135 com 88314544[89]
+vou inserir no local 90
+Comparando 337135 com 88316128[89]
+vou inserir no local 90
+Comparando 337135 com 88317712[89]
+vou inserir no local 90
+Comparando 15961256 com 88331152[90]
+vou inserir no local 91
+Comparando 15961256 com 88332752[90]
+vou inserir no local 91
+Comparando 15961256 com 88334352[90]
+vou inserir no local 91
+Comparando 12244593 com 88331152[90]
+vou inserir no local 91
+Comparando 12244593 com 88332752[90]
+vou inserir no local 91
+Comparando 12244593 com 88334352[90]
+vou inserir no local 91
+Comparando 16409586 com 88362544[91]
+vou inserir no local 91
+Comparando 16409586 com 88364160[91]
+vou inserir no local 91
+Comparando 16409586 com 88365776[91]
+vou inserir no local 91
+Comparando 5602143 com 88379056[91]
+vou inserir no local 91
+Comparando 5602143 com 88380672[91]
+vou inserir no local 91
+Comparando 5602143 com 88382288[91]
+vou inserir no local 91
+Comparando 62181 com 88379056[92]
+vou inserir no local 92
+Comparando 62181 com 88380672[92]
+vou inserir no local 92
+Comparando 62181 com 88382288[92]
+vou inserir no local 92
+Comparando 123648 com 88409520[92]
+vou inserir no local 93
+Comparando 123648 com 88411152[92]
+vou inserir no local 93
+Comparando 123648 com 88412784[92]
+vou inserir no local 93
+Comparando 3746202 com 88424688[93]
+vou inserir no local 94
+Comparando 3746202 com 88426336[93]
+vou inserir no local 94
+Comparando 3746202 com 88427984[93]
+vou inserir no local 94
+Comparando 2392361 com 88424688[93]
+vou inserir no local 94
+Comparando 2392361 com 88426336[93]
+vou inserir no local 94
+Comparando 2392361 com 88427984[93]
+vou inserir no local 94
+Comparando 35808 com 88455936[94]
+vou inserir no local 94
+Comparando 35808 com 88457600[94]
+vou inserir no local 94
+Comparando 35808 com 88459264[94]
+vou inserir no local 94
+Comparando 2215475 com 88472160[94]
+vou inserir no local 95
+Comparando 2215475 com 88473824[94]
+vou inserir no local 95
+Comparando 2215475 com 88475488[94]
+vou inserir no local 95
+Comparando 1735827 com 88489408[95]
+vou inserir no local 95
+Comparando 1735827 com 88491088[95]
+vou inserir no local 95
+Comparando 1735827 com 88492768[95]
+vou inserir no local 95
+Comparando 701713 com 88504256[95]
+vou inserir no local 95
+Comparando 701713 com 88505936[95]
+vou inserir no local 95
+Comparando 701713 com 88507616[95]
+vou inserir no local 95
+Comparando 700710 com 88504256[96]
+vou inserir no local 96
+Comparando 700710 com 88505936[96]
+vou inserir no local 96
+Comparando 700710 com 88507616[96]
+vou inserir no local 96
+Comparando 705211 com 88538736[96]
+vou inserir no local 97
+Comparando 705211 com 88540432[96]
+vou inserir no local 97
+Comparando 705211 com 88542128[96]
+vou inserir no local 97
+Comparando 284049 com 88556080[97]
+vou inserir no local 97
+Comparando 284049 com 88557792[97]
+vou inserir no local 97
+Comparando 284049 com 88559504[97]
+vou inserir no local 97
+Comparando 1463809 com 88573392[97]
+vou inserir no local 97
+Comparando 1463809 com 88575104[97]
+vou inserir no local 97
+Comparando 1463809 com 88576816[97]
+vou inserir no local 97
+Comparando 7100525 com 88573392[98]
+vou inserir no local 98
+Comparando 7100525 com 88575104[98]
+vou inserir no local 98
+Comparando 7100525 com 88576816[98]
+vou inserir no local 98
+Comparando 1924674 com 88604944[98]
+vou inserir no local 98
+Comparando 1924674 com 88606672[98]
+vou inserir no local 98
+Comparando 1924674 com 88608400[98]
+vou inserir no local 98
+Comparando 2228294 com 88604944[99]
+vou inserir no local 99
+Comparando 2228294 com 88606672[99]
+vou inserir no local 99
+Comparando 2228294 com 88608400[99]
+vou inserir no local 99
+
+Arquivo lido com sucesso. Criação de arquivos de saída efetuado.
+Escolha a opção desejada:
+1. Leitura de registros a partir de um arquivo
+2. Remover registro
+3. Inserir registro
+4. Visualizar estatisticas sobre o arquivo de índice
+5. Visualizar estatísticas sobre as listas de registros removidos
+0. Sair
+Programa encerrado.
