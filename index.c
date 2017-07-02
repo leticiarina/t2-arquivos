@@ -25,7 +25,6 @@ INDEX *initIndex(){
 // Função writeIndexFiles: adiciona um registro no arquivo de índice.
 int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index){
 
-	int insertByte;
 	INDEXREG *insert = (INDEXREG*) malloc(sizeof(INDEXREG));
 
 	if(insert != NULL){
@@ -34,7 +33,7 @@ int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index){
 	}
 
 	// Procura o byte em que o registro deve ser inserido no arquivo de índice
-	insertByte = insertIndex(index, insert);
+	insertIndex(index, insert);
 
 	return TRUE;
 
@@ -44,14 +43,24 @@ int searchIndex(INDEX *index, int ticket){
 	int first, last, middle;
 	first = 0;
 	last = index->size - 1;
-	middle = (first + last)/2;
 
 	while(first <= last){
-		if(index->indexReg[middle]->ticket < ticket) first = middle + 1;
-		else if(index->indexReg[middle]->ticket == ticket) return middle;
-		else last = middle - 1;
 
-		if(first <= last) return middle;
+		middle = (first + last)/2;
+
+		printf("Comparando %d com %d[%d]\n", ticket, index->indexReg[middle], middle);
+
+		//if(middle+1 <= last && index->indexReg[middle]->ticket > ticket && index->indexReg[middle+1]->ticket < ticket)
+		//	return middle + 1;
+		if(index->indexReg[middle]->ticket < ticket)
+			first = middle + 1;
+		else if(index->indexReg[middle]->ticket == ticket)
+			return middle;
+		else
+			last = middle - 1;
+
+		if(first <= last)
+			return middle;
 
 	}
 
@@ -59,28 +68,32 @@ int searchIndex(INDEX *index, int ticket){
 }
 
 void insertAndShift(INDEX *index, INDEXREG* insert, int local){
-	local++;
-	int i = index->size;
+
+	printf("vou inserir no local %d\n", local);
+
+	int i = index->size-1;
 	index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
 
 	while(i > local){
-		index->indexReg[i+1] = index->indexReg[i];
+		index->indexReg[i] = index->indexReg[i-1];
 		i--;
 	}
+
 	index->size++;
 	index->indexReg[local] = insert; 
+
 }
 
 // Procura o byte em que um arquivo deve ser inserido.
 int insertIndex(INDEX *index, INDEXREG *insert){
 
 	int local;
+
 	// Nenhum registro foi inserido ainda
 	if(index->size == 0){
-		index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
+		index->indexReg = (INDEXREG**) malloc(sizeof(INDEXREG*));
 		index->indexReg[index->size] = insert;
 		(index->size)++;
-	
 	} else {
 		local = searchIndex(index, insert->ticket);
 		insertAndShift(index, insert, local);	
@@ -96,6 +109,20 @@ void removeIndex(INDEX* index, int local){
 	}
 	index->size--;
 	index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size));
+}
+
+
+// Exibe as estatísticas dos arquivos de índice.
+void showStatisticsIndex(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields){
+
+	printf("_________________________________________________________________________________\n");
+	printf("|		Quantidade de entradas no arquivo de índice			|\n");
+	printf("|_______________________________________________________________________________|\n");
+	printf("| Indicador de tamanho | Delimitador de registros  | Quantidade fixa de campos  |\n");
+	printf("|_______________________________________________________________________________|\n");
+	printf("|		%d 			%d	     			%d 	|\n", indexSizeIndicator->size, indexDelimiterRegister->size, indexFixedFields->size);
+	printf("|_______________________________________________________________________________|\n");
+
 }
 
 void deleteIndex(INDEX *index){

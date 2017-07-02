@@ -22,7 +22,7 @@ int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index);
 int searchIndex(INDEX *index, int ticket);
 void insertAndShift(INDEX *index, INDEXREG* insert, int local);
 int insertIndex(INDEX *index, INDEXREG *insert);
-
+void showStatisticsIndex(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields);
 void deleteIndex(INDEX *index);
 
 #endif

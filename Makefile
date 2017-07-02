@@ -20,4 +20,4 @@ run:
 	./t2
 
 vl:
-	valgrind --leak-check=full ./t2
+	valgrind ./t2

@@ -26,7 +26,7 @@ int main (int argc, char *argv[]){
 				break;
 			case 3: printf("opção 3\n");
 				break;
-			case 4: showStatisticsIndex();
+			case 4: showStatisticsIndex(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 				break;
 			case 5: printf("opção 5\n");
 				break;
