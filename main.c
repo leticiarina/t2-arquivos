@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "auxFunctions.h"
 #include "file.h"
-#include "index.h"
+#include "indexVector.h"
 
 int main (int argc, char *argv[]){
 
@@ -22,21 +22,24 @@ int main (int argc, char *argv[]){
 		scanf("%d", &option);
 
 		switch(option){
-			case 1: readRegisters(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
+			case 1: 
+				readRegisters(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 				break;
 			case 2: 
 				printf("Qual o ticket a ser removido?\n");
-				scanf("%d",&ticket);
-				removeRegister(indexSizeIndicator,ticket,1,&topo1);
-				removeRegister(indexDelimiterRegister,ticket,2,&topo2);
-				removeRegister(indexFixedFields,ticket,3,&topo3);
-				printIndexFile(indexSizeIndicator);
+				scanf("%d", &ticket);
+				removeRegister(indexSizeIndicator, ticket, 1, &topo1);
+				removeRegister(indexDelimiterRegister,ticket, 2, &topo2);
+				removeRegister(indexFixedFields, ticket, 3, &topo3);
 				break;
-			case 3: printf("opção 3\n");
+			case 3: 
+				printf("opção 3\n");
 				break;
-			case 4: showStatisticsIndex(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
+			case 4: 
+				showStatisticsIndex(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 				break;
-			case 5: printf("opção 5\n");
+			case 5:
+				printf("opção 5\n");
 				break;
 		}
 

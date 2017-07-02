@@ -9,7 +9,7 @@
 #define FALSE 0
 #define TRUE 1
 
-#include "index.h"
+#include "indexVector.h"
 
 typedef struct reg{
     char *dominio; //variable size

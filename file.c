@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "file.h"
-#include "index.h"
+#include "indexVector.h"
 
 // Função readRegisters: realiza a leitura de um arquivo de registros.
 void readRegisters(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields){
@@ -78,10 +78,10 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 		writeOutputFiles(regist, delimiterRegister, 2);
 		writeOutputFiles(regist, fixedFields, 3);
 
-		// Escrita no arquivo de índice
-		writeIndexFiles(regist->ticket, sizeIndicatorByte, fileSizeIndicator, indexSizeIndicator);
-		writeIndexFiles(regist->ticket, delimiterRegisterByte, fileDelimiterRegister, indexDelimiterRegister);
-		writeIndexFiles(regist->ticket, fixedFieldsByte, fileFixedFields, indexFixedFields);
+		// Escrita no vetor de índice
+		writeIndexVector(regist->ticket, sizeIndicatorByte, fileSizeIndicator, indexSizeIndicator);
+		writeIndexVector(regist->ticket, delimiterRegisterByte, fileDelimiterRegister, indexDelimiterRegister);
+		writeIndexVector(regist->ticket, fixedFieldsByte, fileFixedFields, indexFixedFields);
 
 		// Libera memória utilizada para guardar cada campo
 	    free(regist->dominio);
@@ -91,10 +91,15 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 
     }
 
-    //Ordena os arquivos de índice
+    //Ordena os vetores de índice
 	orderIndex(indexSizeIndicator);
 	orderIndex(indexDelimiterRegister);
 	orderIndex(indexFixedFields);
+
+	// Escreve nos arquivos de índice
+//	writeIndexFiles(indexSizeIndicator);
+//	writeIndexFiles(indexDelimiterRegister);
+//	writeIndexFiles(indexFixedFields);
 
 //	printIndexFile(indexSizeIndicator);
 
@@ -154,6 +159,7 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 	int regSize = 4*sizeof(int) + sizeof(int) + 3*(20*sizeof(char)) + (int)strlen(regist->dominio) + 
     (int)strlen(regist->nome)+ (int)strlen(regist->cidade)+ (int)strlen(regist->uf);
     
+
     if(type == 1)
 		fwrite(&regSize, 1, sizeof(int), output);
 

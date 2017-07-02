@@ -3,8 +3,8 @@
 ** José Augusto Noronha de Menezes Neto	NUSP:
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
-#ifndef _INDEX_H_
-#define _INDEX_H_
+#ifndef _INDEX_VECTOR_H_
+#define _INDEX_VECTOR_H_
 
 // Struct para armazenar um registro
 typedef struct indexReg {
@@ -18,7 +18,7 @@ typedef struct index {
 } INDEX;
 
 INDEX *initIndex();
-int writeIndexFiles(int ticket, int byteOffset, FILE *indexFile, INDEX *index);
+int writeIndexVector(int ticket, int byteOffset, FILE *indexFile, INDEX *index);
 int searchIndex(INDEX *index, int ticket);
 void insertAndShift(INDEX *index, INDEXREG* insert, int local);
 int insertIndex(INDEX *index, INDEXREG *insert);
