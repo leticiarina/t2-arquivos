@@ -1,5 +1,5 @@
-all: auxFunctions.o file.o indexVector.o main.o
-	gcc -g auxFunctions.o file.o indexVector.o main.o -o t2
+all: auxFunctions.o file.o indexVector.o indexFile.o main.o
+	gcc -g auxFunctions.o file.o indexVector.o indexFile.o main.o -o t2
 
 auxFunctions.o:
 	gcc -g -c auxFunctions.c
@@ -9,6 +9,9 @@ file.o:
 
 indexVector.o:
 	gcc -g -c indexVector.c
+
+indexFile.o:
+	gcc -g -c indexFile.c
 
 main.o:
 	gcc -g -c main.c

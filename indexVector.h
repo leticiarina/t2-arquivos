@@ -18,13 +18,13 @@ typedef struct index {
 } INDEX;
 
 INDEX *initIndex();
-int writeIndexVector(int ticket, int byteOffset, FILE *indexFile, INDEX *index);
+int writeIndexVector(int ticket, int byteOffset, INDEX *index);
 int searchIndex(INDEX *index, int ticket);
 void insertAndShift(INDEX *index, INDEXREG* insert, int local);
 int insertIndex(INDEX *index, INDEXREG *insert);
 void showStatisticsIndex(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields);
 void deleteIndex(INDEX *index);
-int removeRegister(INDEX* index, int ticket, int type, int *topo);
+void removeIndexVector(INDEX* index, int local);
 int sizeOfRegister(FILE *output, int type);
 void Quick(INDEX* index, int inicio, int fim);
 void orderIndex(INDEX *index);

@@ -8,6 +8,7 @@
 #include <string.h>
 #include "file.h"
 #include "indexVector.h"
+#include "indexFile.h"
 
 // Função readRegisters: realiza a leitura de um arquivo de registros.
 void readRegisters(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields){
@@ -32,9 +33,9 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 	FILE *fixedFields = fopen("numero-fixo-campos.bin","wb");
 
 	// Arquivos de índice
-	FILE *fileSizeIndicator = fopen("indice-indicador-tamanho.bin","wb");
-	FILE *fileDelimiterRegister = fopen("indice-delimitador-registros.bin","wb");
-	FILE *fileFixedFields = fopen("indice-numero-fixo-campos.bin","wb");
+	FILE *indexFileSizeIndicator = fopen("indice-indicador-tamanho.bin","wb");
+	FILE *indexFileDelimiterRegister = fopen("indice-delimitador-registros.bin","wb");
+	FILE *indexFileFixedFields = fopen("indice-numero-fixo-campos.bin","wb");
 
 	if(registersFile == NULL){
 		printf("Erro ao abrir o arquivo solicitado.\n\n");
@@ -46,7 +47,7 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
         return FALSE;
     }
 
-    if(fileSizeIndicator == NULL || fileDelimiterRegister == NULL || fileFixedFields == NULL){
+    if(indexFileSizeIndicator == NULL || indexFileDelimiterRegister == NULL || indexFileFixedFields == NULL){
         printf("Erro ao criar arquivos de índice.\n\n");
         return FALSE;
     }
@@ -79,9 +80,9 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 		writeOutputFiles(regist, fixedFields, 3);
 
 		// Escrita no vetor de índice
-		writeIndexVector(regist->ticket, sizeIndicatorByte, fileSizeIndicator, indexSizeIndicator);
-		writeIndexVector(regist->ticket, delimiterRegisterByte, fileDelimiterRegister, indexDelimiterRegister);
-		writeIndexVector(regist->ticket, fixedFieldsByte, fileFixedFields, indexFixedFields);
+		writeIndexVector(regist->ticket, sizeIndicatorByte, indexSizeIndicator);
+		writeIndexVector(regist->ticket, delimiterRegisterByte, indexDelimiterRegister);
+		writeIndexVector(regist->ticket, fixedFieldsByte, indexFixedFields);
 
 		// Libera memória utilizada para guardar cada campo
 	    free(regist->dominio);
@@ -97,11 +98,9 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 	orderIndex(indexFixedFields);
 
 	// Escreve nos arquivos de índice
-//	writeIndexFiles(indexSizeIndicator);
-//	writeIndexFiles(indexDelimiterRegister);
-//	writeIndexFiles(indexFixedFields);
-
-//	printIndexFile(indexSizeIndicator);
+	writeIndexFile(indexSizeIndicator, indexFileSizeIndicator);
+	writeIndexFile(indexDelimiterRegister, indexFileDelimiterRegister);
+	writeIndexFile(indexFixedFields, indexFileFixedFields);
 
     fclose(registersFile);
 
@@ -109,9 +108,9 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
     fclose(delimiterRegister);
     fclose(fixedFields);
 
-    fclose(fileSizeIndicator);
-    fclose(fileDelimiterRegister);
-    fclose(fileFixedFields);
+    fclose(indexFileSizeIndicator);
+    fclose(indexFileDelimiterRegister);
+    fclose(indexFileFixedFields);
 
     free(regist);
 
@@ -199,4 +198,43 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 	else if(type == 3)
 		fprintf(output, "%c", '8');
 
+}
+
+int removeRegister(INDEX* index, int ticket, int type, int *topo){
+	int local, aux, tamanho;
+	char asterisco = '*';
+	FILE *output = NULL;
+	FILE *indexFile = NULL;
+
+	if(type == 1) {
+		output = fopen("indicador-tamanho.bin","rb");
+		indexFile = fopen("indice-indicador-tamanho.bin", "rb");
+	} else if(type == 2) {
+		output = fopen("delimitador-registros.bin","rb");
+		indexFile = fopen("indice-delimitador-registros.bin","rb");
+	} else if(type == 3) {
+		output = fopen("numero-fixo-campos.bin","rb");
+		indexFile = fopen("indice-numero-fixo-campos.bin","rb");
+	} else{
+		printf("ERRO AO ABRIR O ARQUIVO DE DADOS!\n");
+		return 0;
+	}
+
+	local = searchIndex(index,ticket); //faz a busca binaria no indice primario
+
+	if(ticket == index->indexReg[local]->ticket){
+		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro
+		tamanho = sizeOfRegister(output, type); //verifica tamanho do registro
+		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro novamente
+		fwrite(&asterisco,1,sizeof(char),output); //insere o *
+		fwrite(&tamanho,1,sizeof(int),output); //insere o tamanho do registro
+		fwrite(topo,1,sizeof(int),output); //insere o antigo topo
+		*topo = index->indexReg[local]->byteOffset; //atualiza o topo
+		removeIndexVector(index,local); //remove no vetor indice primario
+		writeIndexFile(index, indexFile); // atualiza no disco
+		
+		return TRUE;
+	}
+
+	return FALSE;
 }

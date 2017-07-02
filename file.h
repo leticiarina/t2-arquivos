@@ -26,6 +26,6 @@ void readRegisters(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, IND
 int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields);
 char *readField(FILE *registersFile);
 void writeOutputFiles(REG *regist, FILE *output, int type);
-int sizeOfRegister(FILE *output, int type);
+int removeRegister(INDEX* index, int ticket, int type, int *topo);
 
 #endif

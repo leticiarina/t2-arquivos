@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "file.h"
 #include "indexVector.h"
+#include "indexFile.h"
 
 // Função initIndex: inicializa os vetores de registro
 INDEX *initIndex(){
@@ -23,7 +24,7 @@ INDEX *initIndex(){
 }
 
 // Função writeIndexVector: adiciona um registro no vetor de índice.
-int writeIndexVector(int ticket, int byteOffset, FILE *indexFile, INDEX *index){
+int writeIndexVector(int ticket, int byteOffset, INDEX *index){
 
 	INDEXREG *insert = (INDEXREG*) malloc(sizeof(INDEXREG));
 
@@ -119,7 +120,7 @@ void orderIndex(INDEX *index){
 	Quick(index, 0, index->size - 1);
 }
 
-void removeIndex(INDEX* index, int local){
+void removeIndexVector(INDEX* index, int local){
 	int i = local;
 	while(i+1 < index->size){
 		index->indexReg[i] = index->indexReg[i+1];
@@ -179,40 +180,6 @@ void deleteIndex(INDEX *index){
 
 }
 
-int removeRegister(INDEX* index, int ticket, int type, int *topo){
-	int local, aux, tamanho;
-	char asterisco = '*';
-	FILE *output = NULL;
-
-	if(type == 1) output = fopen("indicador-tamanho.bin","wb");
-	else if(type == 2) output = fopen("delimitador-registros.bin","wb");
-	else if(type == 3) output = fopen("numero-fixo-campos.bin","wb");
-	else{
-		printf("ERRO AO ABRIR O ARQUIVO DE DADOS!\n");
-		return 0;
-	}
-
-	local = searchIndex(index,ticket); //faz a busca binaria no indice primario
-
-	printf("TICKET ENCONTRADO NA POSIVCAO %d!\n",local);
-	if(ticket == index->indexReg[local]->ticket){
-		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro
-		tamanho = sizeOfRegister(output, type); //verifica tamanho do registro
-		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro novamente
-		fwrite(&asterisco,1,sizeof(char),output); //insere o *
-		fwrite(&tamanho,1,sizeof(int),output); //insere o tamanho do registro
-		fwrite(topo,1,sizeof(int),output); //insere o antigo topo
-		*topo = index->indexReg[local]->byteOffset; //atualiza o topo
-		removeIndex(index,local); //remove no indice primario
-
-		printf("REMOÇÃO FOI REALIZADA!\n");
-		return TRUE;
-	}
-
-	printf("REMOÇÃO NÃO FOI REALIZADA!\n");
-	return FALSE;
-}
-
 // Retorna o tamanho de um registro.
 int sizeOfRegister(FILE *output, int type){
 
@@ -220,11 +187,8 @@ int sizeOfRegister(FILE *output, int type){
 
 	// Registro com indicador de tamanho
 	if(type == 1){
-		printf("arquivo está no byte %d\n", ftell(output));
 		fread(&size, sizeof(int), 1, output);
 		fscanf(output, "%d", &size);
-		printf("arquivo está no byte %d\n", ftell(output));
-		printf("size = %d\n", size);
 		return size;
 
 	// Registros com delimitador
@@ -234,12 +198,10 @@ int sizeOfRegister(FILE *output, int type){
 		***	documento, dataHoraCadastro, dataHoraAtualiza: 20 bytes cada um **/
 		size += sizeof(int) + 3*(20*sizeof(char));
 
-		printf("size = %d\n", size);
 		fseek(output, size, SEEK_CUR);
 
 		// Dominio: campo variável		
 		fread(&aux, sizeof(int), 1, output); // Leitura do tamanho
-		printf("aux = %d\n", aux);
 		size += sizeof(int) + aux; // Int que armazena o tamanho e os bytes ocupados pelo campo
 		fseek(output, aux, SEEK_CUR);
 
@@ -258,8 +220,6 @@ int sizeOfRegister(FILE *output, int type){
 		size += sizeof(int) + aux; // Int que armazena o tamanho e os bytes ocupados pelo campo
 
 		size += sizeof(char); // Tamanho do delimitador de registro
-
-		printf("size = %d\n", size);
 
 		return size;
 

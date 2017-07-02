@@ -26,11 +26,14 @@ int main (int argc, char *argv[]){
 				readRegisters(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 				break;
 			case 2: 
-				printf("Qual o ticket a ser removido?\n");
+				printf("Qual o ticket a ser removido? ");
 				scanf("%d", &ticket);
-				removeRegister(indexSizeIndicator, ticket, 1, &topo1);
-				removeRegister(indexDelimiterRegister,ticket, 2, &topo2);
-				removeRegister(indexFixedFields, ticket, 3, &topo3);
+				if(removeRegister(indexSizeIndicator, ticket, 1, &topo1) == 1 && 
+					removeRegister(indexDelimiterRegister,ticket, 2, &topo2) == 1 &&
+					removeRegister(indexFixedFields, ticket, 3, &topo3) == 1)
+					printf("Remoção do ticket feita com sucesso.\n\n");
+				else 
+					printf("Erro na remoção. Ticket não encontrado.\n\n");
 				break;
 			case 3: 
 				printf("opção 3\n");
