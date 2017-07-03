@@ -30,7 +30,6 @@ int main (int argc, char *argv[]){
 				removeRegister(indexSizeIndicator,ticket,1,&topo1);
 				removeRegister(indexDelimiterRegister,ticket,2,&topo2);
 				removeRegister(indexFixedFields,ticket,3,&topo3);
-				printIndexFile(indexSizeIndicator);
 				break;
 			case 3: printf("opção 3\n");
 				break;
