@@ -82,7 +82,7 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
         fscanf(registersFile, "%d\n", &(regist->ticket));
         //printf("Ticket Lido: %d\n",regist->ticket);
         //printf("--------------------------------------------\n");
- 
+
  		// Escrita do registro no arquivo de saída
 		writeOutputFiles(regist, sizeIndicator, 1);
 		writeOutputFiles(regist, delimiterRegister, 2);
@@ -121,7 +121,7 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
     free(regist);
 
     printf("\nArquivo lido com sucesso. Criação de arquivos de saída efetuado.\n");
-    
+
     return TRUE;
 
 }
@@ -163,13 +163,13 @@ void printSizeIndicatorRegister(int byteOffset){
 
 // Função readField: realiza a leitura de um campo no arquivo de registros.
 char *readField(FILE *registersFile){
-	
+
 	char *str = NULL;
     char c;
     int counter = 0;
-    
+
     fscanf(registersFile, "%c", &c);
-    
+
     while(c != ';'){
         str = (char*) realloc(str, sizeof(char)*(counter+1));
         str[counter] = c;
@@ -179,7 +179,7 @@ char *readField(FILE *registersFile){
 
     str = (char*) realloc(str, sizeof(char)*(counter+1));
     str[counter] = '\0';
-    
+
     return str;
 
 }
@@ -189,16 +189,16 @@ char *readField(FILE *registersFile){
 ** 		2 - registros com delimitador
 **		3 - registros com número fixo de campos */
 void writeOutputFiles(REG *regist, FILE *output, int type){
-	
+
 	int size;
 
 	/* 4 ints para armazenar o tamanho dos campos variáveis
-	** 1 int para o ticket	
+	** 1 int para o ticket
 	** 3 de 20 bytes: documento, dataHoraCadastro, dataHoraAtualiza
 	** 4 de campos variáveis */
-	int regSize = 4*sizeof(int) + sizeof(int) + 3*(20*sizeof(char)) + (int)strlen(regist->dominio) + 
+	int regSize = 4*sizeof(int) + sizeof(int) + 3*(20*sizeof(char)) + (int)strlen(regist->dominio) +
     (int)strlen(regist->nome)+ (int)strlen(regist->cidade)+ (int)strlen(regist->uf);
-    
+
     if(type == 1)
 		fwrite(&regSize, 1, sizeof(int), output);
 
@@ -232,7 +232,7 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
     size = (int)strlen(regist->uf);
     fwrite(&size, 1, sizeof(int), output);
     fwrite(regist->uf, (int)strlen(regist->uf), sizeof(char), output);
-    
+
     if(type == 2)
 		fprintf(output, "%c", '#');
 	else if(type == 3)
@@ -248,39 +248,62 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 	FILE *fixedFields = fopen("numero-fixo-campos.bin","rb+");
 
 	int size;
-	char ast;
+	char ast, enter;
 	int num;
 
 	if(topo1 == -1)
 		printf("Nenhum registro foi removido.\n\n");
-	
+
 	else {
-		
+
+		printf("Pressione ENTER para visualizar o próximo registro removido ou 0 para voltar ao menu.\n\n");
+		scanf("%c", &enter);
+
 		// Coloca o ponteiro no byte com o tamanho do registro removido que está no topo
-		while(topo1 != -1){
-			printf("Digite 0 para passar pelos registros removidos!");
-			scanf("%d",&num);
-		
+		while(enter == '\n' && topo1 != -1){
+			// printf("Digite 0 para passar pelos registros removidos!");
+			// scanf("%d",&num);
+
 			fseek(sizeIndicator, topo1 + 1, SEEK_SET);
 			fseek(delimiterRegister, topo2 + 1, SEEK_SET);
 			fseek(fixedFields, topo3 + 1, SEEK_SET);
 
 			// Realiza a leitura do tamanho do registro em cada arquivo
-			/*printf("Estou nos bytes: %d %d %d\n", (int)ftell(sizeIndicator)-1, (int)ftell(delimiterRegister)-1, (int)ftell(fixedFields))-1;
-			fread(&size, sizeof(int), 1, sizeIndicator);*/
-			printf("Delimitador de tamanho: Tamanho: %d Byte offset %d\n", size, (int)ftell(sizeIndicator)-1);
+
+			printf(" --------------------------------\n");
+			printf("|     Indicador de tamanho      |\n");
+			printf(" --------------------------------\n");
+			printf(" Tamanho: %d    Byte offset %d \n ", size, (int)ftell(sizeIndicator)-1);
+			printf(" ------------------------------\n\n");
 			fread(&size, sizeof(int), 1, delimiterRegister);
-			printf("Delimitador de registros: Tamanho: %d Byte offset %d\n", size, (int)ftell(delimiterRegister)-1);
+
+			printf(" --------------------------------\n");
+			printf("|   Delimitador de registros    |\n");
+			printf(" --------------------------------\n");
+			printf(" Tamanho: %d    Byte offset %d \n", size, (int)ftell(delimiterRegister)-1);
+			printf(" --------------------------------\n\n");
 			fread(&size, sizeof(int), 1, fixedFields);
-			printf("Fixo: Tamanho: %d Byte offset %d\n", size, (int)ftell(fixedFields)-1);
+
+			printf(" ---------------------------------\n");
+			printf("|    Quantidade fixa de campos   |\n");
+			printf(" ---------------------------------\n");
+			printf(" Tamanho: %d    Byte offset %d \n", size, (int)ftell(fixedFields)-1);
+			printf(" ---------------------------------\n\n");
 			fread(&topo1, sizeof(int), 1, sizeIndicator);
 			fread(&topo2, sizeof(int), 1, delimiterRegister);
 			fread(&topo3, sizeof(int), 1, fixedFields);
+
+			scanf("%c", &enter);
 		}
+
+		if(topo1 == -1)
+			printf("Todos os registros removidos impressos.\n\n");
+		else if(enter != '\n')
+			printf("Retorno ao menu principal.\n\n");
 	}
 
 	fclose(sizeIndicator);
 	fclose(delimiterRegister);
-	fclose(fixedFields);	
+	fclose(fixedFields);
 
 }
