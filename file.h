@@ -28,5 +28,6 @@ char *readField(FILE *registersFile);
 void writeOutputFiles(REG *regist, FILE *output, int type);
 void printSizeIndicatorRegister(int byteOffset);
 void printSizeIndicatorRegisterUpdated(int byteOffset);
+void showRemovedStatistics(int topo1, int topo2, int topo3);
 
 #endif

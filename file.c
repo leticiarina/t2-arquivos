@@ -239,3 +239,43 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 		fprintf(output, "%c", '8');
 
 }
+
+// Função showRemovedStatistics: mostra estatísticas sobre os registros já removidos
+void showRemovedStatistics(int topo1, int topo2, int topo3){
+
+	FILE *sizeIndicator = fopen("indicador-tamanho.bin","rb+");
+	FILE *delimiterRegister = fopen("delimitador-registros.bin","rb+");
+	FILE *fixedFields = fopen("numero-fixo-campos.bin","rb+");
+
+	int size;
+	char ast;
+
+	if(topo1 == -1)
+		printf("Nenhum registro foi removido.\n\n");
+	
+	else {
+
+		// Coloca o ponteiro no byte com o tamanho do registro removido que está no topo
+		if(topo1 != -1)
+			fseek(sizeIndicator, topo1 + 1, SEEK_SET);
+		if(topo2 != -1)
+			fseek(delimiterRegister, topo2 + 1, SEEK_SET);
+		if(topo3 != -1)
+			fseek(fixedFields, topo3 + 1, SEEK_SET);
+
+		// Realiza a leitura do tamanho do registro em cada arquivo
+		printf("Estou nos bytes: %d %d %d\n", (int)ftell(sizeIndicator), (int)ftell(delimiterRegister), (int)ftell(fixedFields));
+		fread(&size, sizeof(int), 1, sizeIndicator);
+		printf("Delimitador de tamanho: Tamanho: %d Byte atual %d\n", size, (int)ftell(sizeIndicator));
+		fread(&size, sizeof(int), 1, delimiterRegister);
+		printf("Delimitador de registros: Tamanho: %d Byte atual %d\n", size, (int)ftell(delimiterRegister));
+		fread(&size, sizeof(int), 1, fixedFields);
+		printf("Fixo: Tamanho: %d Byte atual %d\n", size, (int)ftell(fixedFields));
+
+	}
+
+	fclose(sizeIndicator);
+	fclose(delimiterRegister);
+	fclose(fixedFields);	
+
+}

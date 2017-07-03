@@ -25,25 +25,22 @@ int main (int argc, char *argv[]){
 		switch(option){
 			case 1: 
 				readRegisters(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
-				printf("Digite o byteoffset do registro a ser impresso: ");
+				/*printf("Digite o byteoffset do registro a ser impresso: ");
 				scanf("%d",&byteOffset);
-				printSizeIndicatorRegister(byteOffset);
+				printSizeIndicatorRegister(byteOffset);*/
 				break;
 			case 2: 
 				printf("Qual o ticket a ser removido?\n");
 				scanf("%d",&ticket);
-				//printSizeIndicatorRegister(162);
 				removeRegister(indexSizeIndicator,ticket,1,&topo1);
 				removeRegister(indexDelimiterRegister,ticket,2,&topo2);
 				removeRegister(indexFixedFields,ticket,3,&topo3);
-				printSizeIndicatorRegisterUpdated(byteOffset);
-				//printIndexFile(indexSizeIndicator);
 				break;
 			case 3: printf("opção 3\n");
 				break;
 			case 4: showStatisticsIndex(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
 				break;
-			case 5: printf("opção 5\n");
+			case 5: showRemovedStatistics(topo1,topo2,topo3);
 				break;
 		}
 

@@ -142,13 +142,36 @@ void removeIndex(INDEX* index, int local){
 // Exibe as estatísticas dos arquivos de índice.
 void showStatisticsIndex(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegister, INDEX *indexFixedFields){
 
-	printf("_________________________________________________________________________________\n");
-	printf("|		Quantidade de entradas no arquivo de índice			|\n");
-	printf("|_______________________________________________________________________________|\n");
-	printf("| Indicador de tamanho | Delimitador de registros  | Quantidade fixa de campos  |\n");
-	printf("|_______________________________________________________________________________|\n");
-	printf("|		%d 			%d	     			%d 	|\n", indexSizeIndicator->size, indexDelimiterRegister->size, indexFixedFields->size);
-	printf("|_______________________________________________________________________________|\n");
+	char enter;
+	int count = 0;
+
+	printf("Pressione ENTER para visualizar o próximo registro e 0 para voltar ao menu.\n\n");
+
+	printf(" -------------------------------------------------------------------------------------- \n");
+	printf("| Indicador de tamanho 	| Delimitador de registros  | Quantidade fixa de campos       \n");
+	printf("|--------------------------------------------------------------------------------------\n");
+	printf("| Registros: %d 	 	Registros: %d	     	Registros: %d 	     	  \n", indexSizeIndicator->size, indexDelimiterRegister->size, indexFixedFields->size);
+	printf("|--------------------------------------------------------------------------------------\n");
+	
+	scanf("%c", &enter);
+
+	// Imprime um registro por vez
+	while(enter == '\n' && count < indexSizeIndicator->size){
+		printf("| Ticket: %d 			", indexSizeIndicator->indexReg[count]->ticket);
+		printf("Ticket: %d 		", indexDelimiterRegister->indexReg[count]->ticket);
+		printf("Ticket: %d 			\n", indexFixedFields->indexReg[count]->ticket);
+		printf("| Byte offset: %d 		", indexSizeIndicator->indexReg[count]->byteOffset);
+		printf("Byte offset: %d 		", indexDelimiterRegister->indexReg[count]->byteOffset);
+		printf("Byte offset: %d 	\n", indexFixedFields->indexReg[count]->byteOffset);
+		printf("|--------------------------------------------------------------------------------------\n");
+		count++;
+		scanf("%c", &enter);
+	} 
+
+	if(count == indexSizeIndicator->size)
+		printf("Todos os registros impressos.\n\n");
+	else if(enter != '\n')
+		printf("Retorno ao menu principal.\n\n");
 
 }
 
