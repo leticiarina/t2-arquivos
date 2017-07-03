@@ -27,5 +27,6 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 char *readField(FILE *registersFile);
 void writeOutputFiles(REG *regist, FILE *output, int type);
 void printSizeIndicatorRegister(int byteOffset);
+void printSizeIndicatorRegisterUpdated(int byteOffset);
 
 #endif

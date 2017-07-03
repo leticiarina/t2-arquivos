@@ -193,10 +193,12 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo){
 		removeIndex(index,local); //remove no indice primario
 
 		printf("REMOÇÃO FOI REALIZADA!\n");
+		fclose(output);
 		return TRUE;
 	}
 
 	printf("REMOÇÃO NÃO FOI REALIZADA!\n");
+	fclose(output);
 	return FALSE;
 }
 

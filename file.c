@@ -126,6 +126,25 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 
 }
 
+void printSizeIndicatorRegisterUpdated(int byteOffset){
+	FILE *fp = fopen("indicador-tamanho.bin","rb");
+	int tamanho, topo;
+	char asterisco;
+
+	fseek(fp,byteOffset,SEEK_SET);
+
+	fread(&asterisco,1,sizeof(char),fp);
+	printf("CHAR LIDO: %c\n",asterisco);
+
+	fread(&tamanho,1,sizeof(int),fp);
+	printf("TAMANHO LIDO: %d\n",tamanho);
+
+	fread(&topo,1,sizeof(int),fp);
+	printf("TOPO LIDO: %d\n",topo);
+
+	fclose(fp);
+}
+
 void printSizeIndicatorRegister(int byteOffset){
 	FILE *fp = fopen("indicador-tamanho.bin","rb");
 	int tamanho, ticket;
