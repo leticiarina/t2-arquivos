@@ -32,11 +32,11 @@ int main (int argc, char *argv[]){
 			case 2: 
 				printf("Qual o ticket a ser removido?\n");
 				scanf("%d",&ticket);
-				printSizeIndicatorRegister(0);
+				//printSizeIndicatorRegister(162);
 				removeRegister(indexSizeIndicator,ticket,1,&topo1);
 				removeRegister(indexDelimiterRegister,ticket,2,&topo2);
 				removeRegister(indexFixedFields,ticket,3,&topo3);
-				printIndexFile(indexSizeIndicator);
+				//printIndexFile(indexSizeIndicator);
 				break;
 			case 3: printf("opção 3\n");
 				break;

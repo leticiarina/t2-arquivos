@@ -170,9 +170,9 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	char asterisco = '*';
 	FILE *output = NULL;
 
-	if(type == 1) output = fopen("indicador-tamanho.bin","wb");
-	else if(type == 2) output = fopen("delimitador-registros.bin","wb");
-	else if(type == 3) output = fopen("numero-fixo-campos.bin","wb");
+	if(type == 1) output = fopen("indicador-tamanho.bin","rb+");
+	else if(type == 2) output = fopen("delimitador-registros.bin","rb+");
+	else if(type == 3) output = fopen("numero-fixo-campos.bin","rb+");
 	else{
 		printf("ERRO AO ABRIR O ARQUIVO DE DADOS!\n");
 		return 0;
