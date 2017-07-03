@@ -16,20 +16,27 @@ int main (int argc, char *argv[]){
 	INDEX *indexFixedFields = initIndex();
 	int ticket;
 	int topo1 = -1, topo2 = -1, topo3 = -1;
+	int byteOffset;
 
 	do {
 		printOptions();
 		scanf("%d", &option);
 
 		switch(option){
-			case 1: readRegisters(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
+			case 1: 
+				readRegisters(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
+				printf("Digite o byteoffset do registro a ser impresso: ");
+				scanf("%d",&byteOffset);
+				printSizeIndicatorRegister(byteOffset);
 				break;
 			case 2: 
 				printf("Qual o ticket a ser removido?\n");
 				scanf("%d",&ticket);
+				printSizeIndicatorRegister(0);
 				removeRegister(indexSizeIndicator,ticket,1,&topo1);
 				removeRegister(indexDelimiterRegister,ticket,2,&topo2);
 				removeRegister(indexFixedFields,ticket,3,&topo3);
+				printIndexFile(indexSizeIndicator);
 				break;
 			case 3: printf("opção 3\n");
 				break;

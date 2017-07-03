@@ -65,13 +65,23 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 
 	    // Leitura de cada campo de cada registro
 		regist->dominio = readField(registersFile);
+		//printf("-------------------------------------------\n");
+		//printf("Dominio Lido: %s\n",regist->dominio);
 		strcpy(regist->documento, readField(registersFile));
+		//printf("Documento Lido: %s\n",regist->documento);
 		regist->nome = readField(registersFile);
+		//printf("Nome Lido: %s\n",regist->nome);
 		regist->cidade = readField(registersFile);
+		//printf("Cidade Lida: %s\n",regist->cidade);
 		regist->uf = readField(registersFile);
+		//printf("UF Lido: %s\n",regist->uf);
 		strcpy(regist->dataHoraCadastro, readField(registersFile));
+		//printf("Data Hora Cadastro Lido: %s\n",regist->dataHoraCadastro);
 		strcpy(regist->dataHoraAtualiza, readField(registersFile));
+		//printf("Data Hora Atualiza Lido: %s\n",regist->dataHoraAtualiza);
         fscanf(registersFile, "%d\n", &(regist->ticket));
+        //printf("Ticket Lido: %d\n",regist->ticket);
+        //printf("--------------------------------------------\n");
  
  		// Escrita do registro no arquivo de saída
 		writeOutputFiles(regist, sizeIndicator, 1);
@@ -113,6 +123,22 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
     printf("\nArquivo lido com sucesso. Criação de arquivos de saída efetuado.\n");
     
     return TRUE;
+
+}
+
+void printSizeIndicatorRegister(int byteOffset){
+	FILE *fp = fopen("indicador-tamanho.bin","rb");
+	int tamanho, ticket;
+
+	fseek(fp,byteOffset,SEEK_SET);
+
+	fread(&tamanho,1,sizeof(int),fp);
+	printf("Tamanho do registro: %d\n",tamanho);
+
+	fread(&ticket,1,sizeof(int),fp);
+	printf("Ticket lido: %d\n",ticket);
+
+	fclose(fp);
 
 }
 
