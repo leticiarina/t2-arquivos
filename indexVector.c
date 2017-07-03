@@ -41,6 +41,8 @@ int writeIndexVector(int ticket, int byteOffset, INDEX *index){
 
 }
 
+// Função searchIndex: realiza uma busca binária para encontrar o local de inserção 
+// de um registro
 int searchIndex(INDEX *index, int ticket){
 	int first, last, middle;
 	first = 0;
@@ -120,6 +122,7 @@ void orderIndex(INDEX *index){
 	Quick(index, 0, index->size - 1);
 }
 
+// Remove um registro do vetor armazenado na memória principal
 void removeIndexVector(INDEX* index, int local){
 	int i = local;
 	while(i+1 < index->size){
@@ -167,6 +170,7 @@ void showStatisticsIndex(INDEX *indexSizeIndicator, INDEX *indexDelimiterRegiste
 
 }
 
+// Libera a memória alocada para um index
 void deleteIndex(INDEX *index){
 
 	int i;

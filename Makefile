@@ -4,7 +4,7 @@
 # Letícia Rina Sakurai					NUSP: 9278010
 
 all: auxFunctions.o file.o indexVector.o indexFile.o main.o
-	gcc -g auxFunctions.o file.o indexVector.o indexFile.o main.o -o t2
+	gcc -g -Wall auxFunctions.o file.o indexVector.o indexFile.o main.o -o t2
 
 auxFunctions.o:
 	gcc -g -c auxFunctions.c
@@ -28,4 +28,4 @@ run:
 	./t2
 
 vl:
-	valgrind ./t2
+	valgrind --leak-check=full ./t2

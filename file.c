@@ -83,13 +83,13 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 		writeIndexVector(regist->ticket, sizeIndicatorByte, indexSizeIndicator);
 		writeIndexVector(regist->ticket, delimiterRegisterByte, indexDelimiterRegister);
 		writeIndexVector(regist->ticket, fixedFieldsByte, indexFixedFields);
-
+	
 		// Libera memória utilizada para guardar cada campo
 	    free(regist->dominio);
 	    free(regist->nome);
 	    free(regist->cidade);
 	    free(regist->uf);
-
+	    
     }
 
     //Ordena os vetores de índice
@@ -200,6 +200,7 @@ void writeOutputFiles(REG *regist, FILE *output, int type){
 
 }
 
+// Função removeRegister: remove um registro do índice e do arquivo de saída
 int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	int local, aux, tamanho;
 	char asterisco = '*';
@@ -207,13 +208,13 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	FILE *indexFile = NULL;
 
 	if(type == 1) {
-		output = fopen("indicador-tamanho.bin","ab+");
+		output = fopen("indicador-tamanho.bin","r+b");
 		indexFile = fopen("indice-indicador-tamanho.bin", "wb");
 	} else if(type == 2) {
-		output = fopen("delimitador-registros.bin","ab+");
+		output = fopen("delimitador-registros.bin","r+b");
 		indexFile = fopen("indice-delimitador-registros.bin","wb");
 	} else if(type == 3) {
-		output = fopen("numero-fixo-campos.bin","ab+");
+		output = fopen("numero-fixo-campos.bin","r+b");
 		indexFile = fopen("indice-numero-fixo-campos.bin","wb");
 	} else{
 		printf("ERRO AO ABRIR O ARQUIVO DE DADOS!\n");
@@ -225,7 +226,9 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	if(ticket == index->indexReg[local]->ticket){
 		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro
 		tamanho = sizeOfRegister(output, type); //verifica tamanho do registro
+		printf("tamanho do registro %d\n", tamanho);
 		fseek(output,index->indexReg[local]->byteOffset,SEEK_SET); //vai para o inicio do registro novamente
+		printf("vou apagar o arquivo, estou no byte %d\n", ftell(output));
 		fwrite(&asterisco,1,sizeof(char),output); //insere o *
 		fwrite(&tamanho,1,sizeof(int),output); //insere o tamanho do registro
 		fwrite(topo,1,sizeof(int),output); //insere o antigo topo
@@ -239,6 +242,7 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo){
 	return FALSE;
 }
 
+// Função showRemovedStatistics: mostra estatísticas sobre os registros já removidos
 void showRemovedStatistics(int topo1, int topo2, int topo3){
 
 	FILE *sizeIndicator = fopen("indicador-tamanho.bin","rb");
@@ -260,27 +264,17 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 			fseek(delimiterRegister, topo2, SEEK_SET);
 		if(topo3 != -1)
 			fseek(fixedFields, topo3, SEEK_SET);
-			
-		fread(&ast, sizeof(char), 1, sizeIndicator);
-		printf("ast = %c ", ast);
-		fread(&ast, sizeof(char), 1, delimiterRegister);
-		printf("ast = %c ", ast);
-		fread(&ast, sizeof(char), 1, fixedFields);
-		printf("ast = %c \n", ast);
 
 		// Realiza a leitura do tamanho do registro em cada arquivo
 		printf("Estou nos bytes: %d %d %d\n", ftell(sizeIndicator), ftell(delimiterRegister), ftell(fixedFields));
 		fread(&size, sizeof(int), 1, sizeIndicator);
-		printf("Tamanho: %d", size);
+		printf("Delimitador de tamanho: Tamanho: %d Byte atual %d\n", size, ftell(sizeIndicator));
 		fread(&size, sizeof(int), 1, delimiterRegister);
-		printf("Tamanho: %d", size);
+		printf("Delimitador de registros: Tamanho: %d Byte atual %d\n", size, ftell(delimiterRegister));
 		fread(&size, sizeof(int), 1, fixedFields);
-		printf("Tamanho: %d\n", size);
-
+		printf("Fixo: Tamanho: %d Byte atual %d\n", size, ftell(fixedFields));
 
 	}
-
-
 
 	fclose(sizeIndicator);
 	fclose(delimiterRegister);
