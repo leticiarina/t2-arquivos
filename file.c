@@ -266,13 +266,13 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 			fseek(fixedFields, topo3 + 1, SEEK_SET);
 
 			// Realiza a leitura do tamanho do registro em cada arquivo
-			printf("Estou nos bytes: %d %d %d\n", (int)ftell(sizeIndicator), (int)ftell(delimiterRegister), (int)ftell(fixedFields));
-			fread(&size, sizeof(int), 1, sizeIndicator);
-			printf("Delimitador de tamanho: Tamanho: %d Byte atual %d\n", size, (int)ftell(sizeIndicator));
+			/*printf("Estou nos bytes: %d %d %d\n", (int)ftell(sizeIndicator)-1, (int)ftell(delimiterRegister)-1, (int)ftell(fixedFields))-1;
+			fread(&size, sizeof(int), 1, sizeIndicator);*/
+			printf("Delimitador de tamanho: Tamanho: %d Byte offset %d\n", size, (int)ftell(sizeIndicator)-1);
 			fread(&size, sizeof(int), 1, delimiterRegister);
-			printf("Delimitador de registros: Tamanho: %d Byte atual %d\n", size, (int)ftell(delimiterRegister));
+			printf("Delimitador de registros: Tamanho: %d Byte offset %d\n", size, (int)ftell(delimiterRegister)-1);
 			fread(&size, sizeof(int), 1, fixedFields);
-			printf("Fixo: Tamanho: %d Byte atual %d\n", size, (int)ftell(fixedFields));
+			printf("Fixo: Tamanho: %d Byte offset %d\n", size, (int)ftell(fixedFields)-1);
 			fread(&topo1, sizeof(int), 1, sizeIndicator);
 			fread(&topo2, sizeof(int), 1, delimiterRegister);
 			fread(&topo3, sizeof(int), 1, fixedFields);
