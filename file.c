@@ -249,29 +249,34 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 
 	int size;
 	char ast;
+	int num;
 
 	if(topo1 == -1)
 		printf("Nenhum registro foi removido.\n\n");
 	
 	else {
-
+		
 		// Coloca o ponteiro no byte com o tamanho do registro removido que está no topo
-		if(topo1 != -1)
+		while(topo1 != -1){
+			printf("Digite 0 para passar pelos registros removidos!");
+			scanf("%d",&num);
+		
 			fseek(sizeIndicator, topo1 + 1, SEEK_SET);
-		if(topo2 != -1)
 			fseek(delimiterRegister, topo2 + 1, SEEK_SET);
-		if(topo3 != -1)
 			fseek(fixedFields, topo3 + 1, SEEK_SET);
 
-		// Realiza a leitura do tamanho do registro em cada arquivo
-		printf("Estou nos bytes: %d %d %d\n", (int)ftell(sizeIndicator), (int)ftell(delimiterRegister), (int)ftell(fixedFields));
-		fread(&size, sizeof(int), 1, sizeIndicator);
-		printf("Delimitador de tamanho: Tamanho: %d Byte atual %d\n", size, (int)ftell(sizeIndicator));
-		fread(&size, sizeof(int), 1, delimiterRegister);
-		printf("Delimitador de registros: Tamanho: %d Byte atual %d\n", size, (int)ftell(delimiterRegister));
-		fread(&size, sizeof(int), 1, fixedFields);
-		printf("Fixo: Tamanho: %d Byte atual %d\n", size, (int)ftell(fixedFields));
-
+			// Realiza a leitura do tamanho do registro em cada arquivo
+			printf("Estou nos bytes: %d %d %d\n", (int)ftell(sizeIndicator), (int)ftell(delimiterRegister), (int)ftell(fixedFields));
+			fread(&size, sizeof(int), 1, sizeIndicator);
+			printf("Delimitador de tamanho: Tamanho: %d Byte atual %d\n", size, (int)ftell(sizeIndicator));
+			fread(&size, sizeof(int), 1, delimiterRegister);
+			printf("Delimitador de registros: Tamanho: %d Byte atual %d\n", size, (int)ftell(delimiterRegister));
+			fread(&size, sizeof(int), 1, fixedFields);
+			printf("Fixo: Tamanho: %d Byte atual %d\n", size, (int)ftell(fixedFields));
+			fread(&topo1, sizeof(int), 1, sizeIndicator);
+			fread(&topo2, sizeof(int), 1, delimiterRegister);
+			fread(&topo3, sizeof(int), 1, fixedFields);
+		}
 	}
 
 	fclose(sizeIndicator);
