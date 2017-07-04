@@ -14,6 +14,7 @@ int main (int argc, char *argv[]){
 	INDEX *indexSizeIndicator = initIndex();
 	INDEX *indexDelimiterRegister = initIndex();
 	INDEX *indexFixedFields = initIndex();
+	REG *reg = NULL;
 	int ticket;
 	int topo1 = -1, topo2 = -1, topo3 = -1;
 	int byteOffset;
@@ -37,7 +38,13 @@ int main (int argc, char *argv[]){
 					printf("Erro na remoção. Ticket não encontrado.\n\n");
 				break;
 			case 3: 
-				printf("opção 3\n"); // Inserção
+				reg = readNewRegist();
+				if(insertNewRegister(1, &topo1, reg, indexSizeIndicator) == TRUE  &&
+					insertNewRegister(2, &topo2, reg, indexDelimiterRegister) == TRUE &&
+					insertNewRegister(3, &topo3, reg, indexFixedFields) == TRUE)
+					printf("Inserção feita com sucesso.\n\n");
+				else
+					printf("Erro na inserção.\n\n");
 				break;
 			case 4: 
 				showStatisticsIndex(indexSizeIndicator, indexDelimiterRegister, indexFixedFields);
@@ -55,6 +62,9 @@ int main (int argc, char *argv[]){
 	deleteIndex(indexSizeIndicator);
 	deleteIndex(indexDelimiterRegister);
 	deleteIndex(indexFixedFields);
+
+	free(reg);
+
 	printf("Programa encerrado.\n");
 
 }

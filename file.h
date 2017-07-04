@@ -30,5 +30,9 @@ int removeRegister(INDEX* index, int ticket, int type, int *topo);
 void printSizeIndicatorRegister(int byteOffset);
 void printSizeIndicatorRegisterUpdated(int byteOffset);
 void showRemovedStatistics(int topo1, int topo2, int topo3);
+int insertNewRegister(int type, int *topo, REG* regist, INDEX *index);
+int sizeNewRegister(REG *regist, int type);
+REG* readNewRegist();
+
 
 #endif

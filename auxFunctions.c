@@ -1,5 +1,4 @@
 /* Donizeti Carlos dos Santos Junior	NUSP: 9393882
-** Gabriel Oliveira da Silva Hirga 		NUSP: 9278052
 ** José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
@@ -18,3 +17,22 @@ void printOptions(){
 	printf("0. Sair\n");
 
 }
+
+char *readLine(){
+	char *str = NULL;
+	char c;
+	int counter = 0;
+
+	scanf("%c",&c);
+	while(c != '\n'){
+		str = (char*) realloc(str, sizeof(char)*(counter+1));
+        str[counter] = c;
+        counter++;
+		scanf("%c",&c);
+	}
+	str = (char*) realloc(str, sizeof(char)*(counter+1));
+	str[counter] = '\0';
+
+	return str;
+}
+

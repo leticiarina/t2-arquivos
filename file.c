@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
+#include "auxFunctions.h"
 #include "file.h"
 #include "indexVector.h"
 #include "indexFile.h"
@@ -361,90 +363,207 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 
 REG* readNewRegist(){
 	REG *regist = (REG*)malloc(sizeof(REG));
-	char *str;
-
-	printf("Digite o numero do ticket: ");
-	scanf("%d",&regist->ticket);
-
-	printf("Digite o numero do documento: ");
-	scanf("%s",regist->documento);
-
-	printf("Digite a data e hora de cadastro: ");
-	scanf("%s", regist->dataHoraCadastro);
-
-	printf("Digite a data e hora de atualizacao: ");
-	scanf("%s", regist->dataHoraAtualiza);
 
 	printf("Digite o dominio: ");
-	str = readLine();
-	strcpy(regist->dominio,str);
+	getchar();
+	regist->dominio = readLine();
+
+	printf("Digite o numero do documento da seguinte forma: ###.###.###/###-## ");
+	scanf("%s",regist->documento);
 
 	printf("Digite o nome: ");
-	str = readLine();
-	strcpy(regist->nome,str);
+	getchar();
+	regist->nome = readLine();
+
+	printf("Digite a UF: ");
+	getchar();
+	regist->uf = readLine();
 
 	printf("Digite uma cidade: ");
-	str = readLine();
-	strcpy(regist->cidade,str);
+	getchar();
+	regist->cidade = readLine();
 
-	printf("Digite um estado: ");
-	str = readLine();
-	strcpy(regist->uh,str);
+	printf("Digite a data e hora de cadastro no formato: dd/mm/aaaa hh:mm:ss ");
+	scanf("%s", regist->dataHoraCadastro);
+
+	printf("Digite a data e hora de atualizacao no formato: dd/mm/aaaa hh:mm:ss ");
+	scanf("%s", regist->dataHoraAtualiza);
+
+ 	printf("Digite o numero do ticket: ");
+	scanf("%d",&(regist->ticket));
 
 	return regist;
+
 }
 
-char *readLine(){
-	char *str = NULL;
-	char c;
-	int counter = 0;
-
-	scanf("%c",&c);
-	while(c != '\n'){
-		str = (char*) realloc(str, sizeof(char)*(counter+1));
-        str[counter] = c;
-        counter++;
-		scanf("%c",&c);
-	}
-	str = (char*) realloc(str, sizeof(char)*(counter+1));
-	str[counter] = c;
-
-	return str;
-}
-
-void insertNewRegister(int type, int topo, REG* regist, INDEX *index){
-	int byteOffset = topo;
+int insertNewRegister(int type, int *topo, REG* regist, INDEX *index){
+	int byteOffset = *topo, removedSize, insertIn, size = 0, nextRemoved = 0, byteLeft;
 	FILE *output = NULL;
     
-    //registro com indicador de tamanho: aplica first-fit
+    // First-fit
 	if(type == 1){
 		output = fopen("indicador-tamanho.bin","rb+");
-		//first-fit: o primeiro procurado
-
 		
-		
-		fseek(output,topo,SEEK_SET);
-		writeOutputFiles(regist,output,1);
-		writeIndex(regist->ticket, topo, index);
-		orderIndex(index);
-	}
+		do{
+			fseek(output, byteOffset+1,SEEK_SET); 	
+			fread(&removedSize, sizeof(int), 1, output); // Leitura do tamanho ocupado pelo registro removido
+			fread(&nextRemoved, sizeof(int), 1,	 output); // Byte do próximo registro removido
+			size = sizeNewRegister(regist, 1); // Calcula o tamanho do registro a ser inserido
 
-	else if(type == 2){
+			// Registro antigo possui mesmo tamanho
+			if(size == removedSize){
+				fseek(output,byteOffset+1,SEEK_SET); 
+				writeOutputFiles(regist,output,1);
+				writeIndexVector(regist->ticket, byteOffset, index);
+				orderIndex(index);
+				fclose(output);
+				*topo = nextRemoved;
+				return TRUE;
+
+			// Tratamento de fragmentação (topo é o mesmo)
+			} else if(size < removedSize){
+				byteLeft = removedSize-size;
+				fseek(output,byteOffset+1,SEEK_SET); 
+				fwrite(&byteLeft, 1, sizeof(int), output); // Quantidade de bytes que sobrou
+				fseek(output, byteOffset+byteLeft, SEEK_SET);
+				writeOutputFiles(regist,output,1);
+				writeIndexVector(regist->ticket, byteOffset+byteLeft, index);
+				orderIndex(index);
+				return TRUE;
+			}
+
+			byteOffset = nextRemoved;
+
+		} while(size > removedSize && byteOffset != -1);
+
+	// Best-fit
+	} else if(type == 2){
+
 		output = fopen("delimitador-registros.bin","rb+");
 
-		fseek(output,byteOffset+1,SEEK_SET);
-		fread(&tamanho,1,sizeof(int),output);
-		best = tamanho;
-		byteAnterior = byteOffset;
-		fseek(output,byteOffset+5,SEEK_SET);
-		fread(&byteOffset,1,sizeof(int),output);
+		size = sizeNewRegister(regist, 2); // Calcula o tamanho do registro a ser inserido
+		byteLeft = INT_MAX;
 
-		do{
-			fseek(output,byteOffset+1,SEEK_SET);
-			fread(&tamanho,1,sizeof(int),output);
-			if(tamanho < best){
-				best = tamanho;
+		// Verifica todos os registros removidos
+		do {
+			fseek(output, byteOffset+1,SEEK_SET); 	
+			fread(&removedSize, sizeof(int), 1, output); // Leitura do tamanho ocupado pelo registro removido
+			fread(&nextRemoved, sizeof(int), 1,	 output); // Byte do próximo registro removido			
+		
+			// Verifica se existe um espaço mais adequado para inserção
+			if(byteLeft > removedSize-size && removedSize-size >= 0){
+				byteLeft = removedSize-size;
+				insertIn = byteOffset;
 			}
-		}while()
+
+			byteOffset = nextRemoved;
+
+		} while(nextRemoved != -1);
+	
+		fseek(output,insertIn+1,SEEK_SET); 
+		fwrite(&byteLeft, 1, sizeof(int), output); // Quantidade de bytes que sobrou
+		fseek(output, insertIn+byteLeft, SEEK_SET);
+		writeOutputFiles(regist,output,2);
+		writeIndexVector(regist->ticket, insertIn+byteLeft, index);
+		orderIndex(index);
+		return TRUE;
+
+	// Worst-fit
+	} else if(type == 3){
+
+		output = fopen("numero-fixo-campos.bin","rb+");
+
+		size = sizeNewRegister(regist, 3); // Calcula o tamanho do registro a ser inserido
+		byteLeft = 0;
+
+		// Verifica todos os registros removidos
+		do {
+			fseek(output, byteOffset+1,SEEK_SET); 	
+			fread(&removedSize, sizeof(int), 1, output); // Leitura do tamanho ocupado pelo registro removido
+			fread(&nextRemoved, sizeof(int), 1,	 output); // Byte do próximo registro removido			
+		
+			// Verifica se existe um espaço mais adequado para inserção
+			if(byteLeft < removedSize-size && removedSize-size >= 0){
+				byteLeft = removedSize-size;
+				insertIn = byteOffset;
+			}
+
+			byteOffset = nextRemoved;
+
+		} while(nextRemoved != -1);
+	
+		fseek(output,insertIn+1,SEEK_SET); 
+		fwrite(&byteLeft, 1, sizeof(int), output); // Quantidade de bytes que sobrou
+		fseek(output, insertIn+byteLeft, SEEK_SET);
+		writeOutputFiles(regist,output,3);
+		writeIndexVector(regist->ticket, insertIn+byteLeft, index);
+		orderIndex(index);
+		return TRUE;
+
 	}
+
+
+}
+
+int sizeNewRegister(REG *regist, int type){
+
+	int size = 0;
+
+	// Indicador de tamanho do registro
+	if(type == 1){
+
+		/** 6 int:
+		** - tamanho do registro
+		** - ticket
+		** - tamanho do dominio
+		** - tamanho do nome
+		** - tamanho da cidade
+		** - tamanho do UF
+		** 20 bytes - documento
+		** 20 bytes - dataHoraCadastro
+		** 20 - dataHoraAtualiza
+		** Bytes ocupados por cada campo
+		**/
+		size += 6*sizeof(int) + 3*(20*sizeof(char))+ (int)strlen(regist->dominio)+(int)strlen(regist->nome)+(int)strlen(regist->cidade)+(int)strlen(regist->uf);
+		return size;
+	
+	// Delimitador de registro
+	} else if(type == 2){
+
+		/** 5 int:
+		** - ticket
+		** - tamanho do dominio
+		** - tamanho do nome
+		** - tamanho da cidade
+		** - tamanho do UF
+		** 1 char: delimitador de registro
+		** 20 bytes - documento
+		** 20 bytes - dataHoraCadastro
+		** 20 - dataHoraAtualiza
+		** Bytes ocupados por cada campo
+		**/
+
+		size += 5*sizeof(int) + sizeof(char) + 3*(20*sizeof(char))+(int)strlen(regist->dominio)+(int)strlen(regist->nome)+(int)strlen(regist->cidade)+(int)strlen(regist->uf);
+		return size;
+
+	// Número fixo de campos
+	} else if(type == 3){
+
+		/** 5 int:
+		** - ticket
+		** - tamanho do dominio
+		** - tamanho do nome
+		** - tamanho da cidade
+		** - tamanho do UF
+		** 9 char: indicador de inicio de cada campo
+		** 20 bytes - documento
+		** 20 bytes - dataHoraCadastro
+		** 20 - dataHoraAtualiza
+		** Bytes ocupados por cada campo
+		**/
+		size += 5*sizeof(int) + 9*sizeof(char) + 3*(20*sizeof(char))+(int)strlen(regist->dominio)+(int)strlen(regist->nome)+(int)strlen(regist->cidade)+(int)strlen(regist->uf);
+		return size;
+	
+	}
+
 }
