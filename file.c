@@ -358,3 +358,38 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 	fclose(fixedFields);
 
 }
+
+REG* readNewRegist(){
+	REG *regist = (REG*)malloc(sizeof(REG));
+	char *str;
+
+	printf("Digite o numero do ticket: ");
+	scanf("%d",&regist->ticket);
+
+	printf("Digite o numero do documento: ");
+	scanf("%s",regist->documento);
+
+	printf("Digite a data e hora de cadastro: ");
+	scanf("%s", regist->dataHoraCadastro);
+
+	printf("Digite a data e hora de atualizacao: ");
+	scanf("%s", regist->dataHoraAtualiza);
+
+	printf("Digite o dominio: ");
+	str = readLine();
+	strcpy(regist->dominio,str);
+
+	printf("Digite o nome: ");
+	str = readLine();
+	strcpy(regist->nome,str);
+
+	printf("Digite uma cidade: ");
+	str = readLine();
+	strcpy(regist->cidade,str);
+
+	printf("Digite um estado: ");
+	str = readLine();
+	strcpy(regist->uh,str);
+
+	return regist;
+}
