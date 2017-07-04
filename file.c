@@ -393,3 +393,21 @@ REG* readNewRegist(){
 
 	return regist;
 }
+
+char *readLine(){
+	char *str = NULL;
+	char c;
+	int counter = 0;
+
+	scanf("%c",&c);
+	while(c != '\n'){
+		str = (char*) realloc(str, sizeof(char)*(counter+1));
+        str[counter] = c;
+        counter++;
+		scanf("%c",&c);
+	}
+	str = (char*) realloc(str, sizeof(char)*(counter+1));
+	str[counter] = c;
+
+	return str;
+}
