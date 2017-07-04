@@ -1,5 +1,4 @@
-/* Donizeti Carlos dos Santos Junior	NUSP: 9393882
-** José Augusto Noronha de Menezes Neto	NUSP: 9293049
+/* José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
 #include <stdio.h>
@@ -18,6 +17,7 @@ void printOptions(){
 
 }
 
+// Função readLine: leitura de uma linha escrita 
 char *readLine(){
 	char *str = NULL;
 	char c;

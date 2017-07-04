@@ -1,6 +1,4 @@
-/* Donizeti Carlos dos Santos Junior	NUSP: 9393882
-** Gabriel Oliveira da Silva Hirga 		NUSP: 9278052
-** José Augusto Noronha de Menezes Neto	NUSP: 9293049
+/* José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
 #include <stdlib.h>
@@ -65,21 +63,6 @@ int searchIndex(INDEX *index, int ticket){
 	}
 
 	return middle;
-}
-
-void insertAndShift(INDEX *index, INDEXREG* insert, int local){
-
-	int i = index->size-1;
-	index->indexReg = (INDEXREG**) realloc(index->indexReg, sizeof(INDEXREG*)*(index->size)+1);
-
-	while(i > local){
-		index->indexReg[i] = index->indexReg[i-1];
-		i--;
-	}
-
-	index->size++;
-	index->indexReg[local] = insert; 
-
 }
 
 // Realiza a inserção no vetor de índice.

@@ -1,5 +1,4 @@
 /* Donizeti Carlos dos Santos Junior	NUSP: 9393882
-** Gabriel Oliveira da Silva Hirga 		NUSP: 9278052
 ** José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
@@ -27,12 +26,10 @@ int createOutputFiles(char *filename, INDEX *indexSizeIndicator, INDEX *indexDel
 char *readField(FILE *registersFile);
 void writeOutputFiles(REG *regist, FILE *output, int type);
 int removeRegister(INDEX* index, int ticket, int type, int *topo);
-void printSizeIndicatorRegister(int byteOffset);
-void printSizeIndicatorRegisterUpdated(int byteOffset);
 void showRemovedStatistics(int topo1, int topo2, int topo3);
+REG* readNewRegist();
 int insertNewRegister(int type, int *topo, REG* regist, INDEX *index);
 int sizeNewRegister(REG *regist, int type);
-REG* readNewRegist();
 
 
 #endif

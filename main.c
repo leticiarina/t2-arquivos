@@ -1,6 +1,4 @@
-/* Donizeti Carlos dos Santos Junior	NUSP: 9393882
-** Gabriel Oliveira da Silva Hirga 		NUSP: 9278052
-** José Augusto Noronha de Menezes Neto	NUSP: 9293049
+/* José Augusto Noronha de Menezes Neto	NUSP: 9293049
 ** Letícia Rina Sakurai					NUSP: 9278010 */
 
 #include <stdio.h>
@@ -30,9 +28,9 @@ int main (int argc, char *argv[]){
 			case 2: 
 				printf("Qual o ticket a ser removido? ");
 				scanf("%d", &ticket);
-				if(removeRegister(indexSizeIndicator, ticket, 1, &topo1) == 1 && 
-					removeRegister(indexDelimiterRegister,ticket, 2, &topo2) == 1 &&
-					removeRegister(indexFixedFields, ticket, 3, &topo3) == 1)
+				if(removeRegister(indexSizeIndicator, ticket, 1, &topo1) == TRUE && 
+					removeRegister(indexDelimiterRegister,ticket, 2, &topo2) == TRUE &&
+					removeRegister(indexFixedFields, ticket, 3, &topo3) == TRUE)
 					printf("Remoção do ticket feita com sucesso.\n\n");
 				else 
 					printf("Erro na remoção. Ticket não encontrado.\n\n");
