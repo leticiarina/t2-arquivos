@@ -411,3 +411,40 @@ char *readLine(){
 
 	return str;
 }
+
+void insertNewRegister(int type, int topo, REG* regist, INDEX *index){
+	int byteOffset = topo;
+	FILE *output = NULL;
+    
+    //registro com indicador de tamanho: aplica first-fit
+	if(type == 1){
+		output = fopen("indicador-tamanho.bin","rb+");
+		//first-fit: o primeiro procurado
+
+		
+		
+		fseek(output,topo,SEEK_SET);
+		writeOutputFiles(regist,output,1);
+		writeIndex(regist->ticket, topo, index);
+		orderIndex(index);
+	}
+
+	else if(type == 2){
+		output = fopen("delimitador-registros.bin","rb+");
+
+		fseek(output,byteOffset+1,SEEK_SET);
+		fread(&tamanho,1,sizeof(int),output);
+		best = tamanho;
+		byteAnterior = byteOffset;
+		fseek(output,byteOffset+5,SEEK_SET);
+		fread(&byteOffset,1,sizeof(int),output);
+
+		do{
+			fseek(output,byteOffset+1,SEEK_SET);
+			fread(&tamanho,1,sizeof(int),output);
+			if(tamanho < best){
+				best = tamanho;
+			}
+		}while()
+	}
+}
