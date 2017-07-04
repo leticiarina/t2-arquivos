@@ -252,7 +252,7 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 	FILE *delimiterRegister = fopen("delimitador-registros.bin","rb+");
 	FILE *fixedFields = fopen("numero-fixo-campos.bin","rb+");
 
-	int size, byteSizeIndicator, byteDelimiterRegister, byteFixedFields;
+	int size, removed = 0, auxByte = topo1, byteSizeIndicator, byteDelimiterRegister, byteFixedFields;
 	char ast, enter;
 
 	if(topo1 == -1)
@@ -260,6 +260,15 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 
 	else {
 
+		// Contagem de registros removidos
+		while(auxByte != -1){
+			fseek(sizeIndicator, auxByte+1, SEEK_SET);
+			fread(&size, sizeof(int), 1, sizeIndicator);
+			fread(&auxByte, sizeof(int), 1, sizeIndicator);
+			removed++;
+		}
+
+		printf("Quantidade de registros removidos: %d\n", removed);
 		printf("Pressione ENTER para visualizar o próximo registro removido ou 0 para voltar ao menu.\n\n");
 		scanf("%c", &enter);
 
@@ -277,28 +286,28 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 			// Realiza a leitura do tamanho do registro em cada arquivo
 
 			fread(&size, sizeof(int), 1, sizeIndicator);
-			printf(" --------------------------------\n");
-			printf("|     Indicador de tamanho      |\n");
-			printf(" --------------------------------\n");
-			printf(" Tamanho: %d    Byte offset %d \n ", size, byteSizeIndicator);
-			printf(" ------------------------------\n\n");
+			fread(&topo1, sizeof(int), 1, sizeIndicator);
+			printf(" ----------------------------------------------------------------------------\n");
+			printf("|                       Indicador de tamanho                                 |\n");
+			printf(" ----------------------------------------------------------------------------\n");
+			printf(" Tamanho: %d    Byte offset %d     Byte offset do próximo removido: %d \n ", size, byteSizeIndicator, topo1);
+			printf(" ---------------------------------------------------------------------------\n\n");
 
 			fread(&size, sizeof(int), 1, delimiterRegister);
-			printf(" --------------------------------\n");
-			printf("|   Delimitador de registros    |\n");
-			printf(" --------------------------------\n");
-			printf(" Tamanho: %d    Byte offset %d \n", size, byteDelimiterRegister);
-			printf(" --------------------------------\n\n");
+			fread(&topo2, sizeof(int), 1, delimiterRegister);
+			printf(" ----------------------------------------------------------------------------\n");
+			printf("|                        Delimitador de registros                            |\n");
+			printf(" ----------------------------------------------------------------------------\n");
+			printf(" Tamanho: %d    Byte offset %d      Byte offset do próximo removido: %d \n ", size, byteDelimiterRegister, topo2);
+			printf(" ----------------------------------------------------------------------------\n\n");
 		
 			fread(&size, sizeof(int), 1, fixedFields);
-			printf(" ---------------------------------\n");
-			printf("|    Quantidade fixa de campos   |\n");
-			printf(" ---------------------------------\n");
-			printf(" Tamanho: %d    Byte offset %d \n", size, byteFixedFields);
-			printf(" ---------------------------------\n\n");
-			fread(&topo1, sizeof(int), 1, sizeIndicator);
-			fread(&topo2, sizeof(int), 1, delimiterRegister);
 			fread(&topo3, sizeof(int), 1, fixedFields);
+			printf(" ----------------------------------------------------------------------------\n");
+			printf("|                         Quantidade fixa de campos                          |\n");
+			printf(" ----------------------------------------------------------------------------\n");
+			printf(" Tamanho: %d    Byte offset %d      Byte offset do próximo removido: %d \n", size, byteFixedFields, topo3);
+			printf(" ---------------------------------------------------------------------------\n\n");
 
 			scanf("%c", &enter);
 		}
