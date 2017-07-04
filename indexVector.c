@@ -187,12 +187,10 @@ void deleteIndex(INDEX *index){
 // Retorna o tamanho de um registro.
 int sizeOfRegister(FILE *output, int type){
 
-	int size = 0, aux = 0;
-
+	int size = 0, aux;
 	// Registro com indicador de tamanho
 	if(type == 1){
-		fread(&size, sizeof(int), 1, output);
-		fscanf(output, "%d", &size);
+		fread(&size,1,sizeof(int),output);
 		return size;
 
 	// Registros com delimitador
@@ -204,23 +202,23 @@ int sizeOfRegister(FILE *output, int type){
 
 		fseek(output, size, SEEK_CUR);
 
-		// Dominio: campo variável		
-		fread(&aux, sizeof(int), 1, output); // Leitura do tamanho
+		// Dominio: campo variável
+		fread(&aux,1,sizeof(int),output); //Leitura do tamanho		
 		size += sizeof(int) + aux; // Int que armazena o tamanho e os bytes ocupados pelo campo
 		fseek(output, aux, SEEK_CUR);
 
-		// Nome: campo variável		
-		fscanf(output, "%d\n", &aux); // Leitura do tamanho
+		// Nome: campo variável	
+		fread(&aux,1,sizeof(int),output); // Leitura do tamanho
 		size += sizeof(int) + aux; // Int que armazena o tamanho e os bytes ocupados pelo campo
 		fseek(output, aux, SEEK_CUR);
 
 		// Cidade: campo variável
-		fscanf(output, "%d\n", &aux); // Leitura do tamanho
+		fread(&aux,1,sizeof(int),output); // Leitura do tamanho
 		size += sizeof(int) + aux; // Int que armazena o tamanho e os bytes ocupados pelo campo
 		fseek(output, aux, SEEK_CUR);
 		
 		// UF: campo variável		
-		fscanf(output, "%d\n", &aux); // Leitura do tamanho
+		fread(&aux,1,sizeof(int),output); // Leitura do tamanho
 		size += sizeof(int) + aux; // Int que armazena o tamanho e os bytes ocupados pelo campo
 
 		size += sizeof(char); // Tamanho do delimitador de registro
@@ -238,25 +236,25 @@ int sizeOfRegister(FILE *output, int type){
 
 		// Dominio: pula o byte de indicação do campo atual
 		fseek(output, sizeof(char), SEEK_CUR);
-		fscanf(output, "%d", &aux); // Leitura do tamanho
+		fread(&aux,1,sizeof(int),output); // Leitura do tamanho
 		size += sizeof(char) + sizeof(int) + aux; // Char indicador de campo, int que armazena o tamanho e os bytes ocupados pelo campo
 		fseek(output, aux, SEEK_CUR);
 
 		// Nome: pula o byte de indicação do campo atual
 		fseek(output, sizeof(char), SEEK_CUR);
-		fscanf(output, "%d", &aux); // Leitura do tamanho
+		fread(&aux,1,sizeof(int),output); // Leitura do tamanho
 		size += sizeof(char) + sizeof(int) + aux; // Char indicador de campo, int que armazena o tamanho e os bytes ocupados pelo campo
 		fseek(output, aux, SEEK_CUR);
 
 		// Cidade: pula o byte de indicação do campo atual
 		fseek(output, sizeof(char), SEEK_CUR);
-		fscanf(output, "%d", &aux); // Leitura do tamanho
+		fread(&aux,1,sizeof(int),output); // Leitura do tamanho
 		size += sizeof(char) + sizeof(int) + aux; // Char indicador de campo, int que armazena o tamanho e os bytes ocupados pelo campo
 		fseek(output, aux, SEEK_CUR);
 
 		// UF: pula o byte de indicação do campo atual
 		fseek(output, sizeof(char), SEEK_CUR);
-		fscanf(output, "%d", &aux); // Leitura do tamanho
+		fread(&aux,1,sizeof(int),output); // Leitura do tamanho
 		size += sizeof(char) + sizeof(int) + aux; // Char indicador de campo, int que armazena o tamanho e os bytes ocupados pelo campo
 
 		size += sizeof(char); // Contabiliza o último indicador de campo (final do registro)

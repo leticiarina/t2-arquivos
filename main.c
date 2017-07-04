@@ -16,6 +16,7 @@ int main (int argc, char *argv[]){
 	INDEX *indexFixedFields = initIndex();
 	int ticket;
 	int topo1 = -1, topo2 = -1, topo3 = -1;
+	int byteOffset;
 
 	do {
 		printOptions();
