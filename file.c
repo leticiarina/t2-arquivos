@@ -317,34 +317,43 @@ void showRemovedStatistics(int topo1, int topo2, int topo3){
 
 REG* readNewRegist(){
 	REG *regist = (REG*)malloc(sizeof(REG));
+	char *str = NULL;
 
 	printf("Digite o dominio: ");
 	getchar();
 	regist->dominio = readLine();
+	printf("lido: %s\n",regist->dominio);
 
 	printf("Digite o numero do documento da seguinte forma: ###.###.###/###-## ");
-	scanf("%s",regist->documento);
+	str = readLine();
+	strcpy(regist->documento,str);
+	printf("lido: %s\n",regist->documento);
 
 	printf("Digite o nome: ");
-	getchar();
 	regist->nome = readLine();
+	printf("lido: %s\n",regist->nome);
 
 	printf("Digite a UF: ");
-	getchar();
 	regist->uf = readLine();
+	printf("lido: %s\n",regist->uf);
 
 	printf("Digite uma cidade: ");
-	getchar();
 	regist->cidade = readLine();
+	printf("lido: %s\n",regist->cidade);
 
 	printf("Digite a data e hora de cadastro no formato: dd/mm/aaaa hh:mm:ss ");
-	scanf("%s", regist->dataHoraCadastro);
+	str = readLine();
+	strcpy(regist->dataHoraCadastro,str);
+	printf("lido: %s\n",regist->dataHoraCadastro);
 
 	printf("Digite a data e hora de atualizacao no formato: dd/mm/aaaa hh:mm:ss ");
-	scanf("%s", regist->dataHoraAtualiza);
+	str = readLine();
+	strcpy(regist->dataHoraAtualiza,str);
+	printf("lido: %s\n",regist->dataHoraAtualiza);
 
  	printf("Digite o numero do ticket: ");
 	scanf("%d",&(regist->ticket));
+	printf("lido: %d\n",regist->ticket);
 
 	return regist;
 
